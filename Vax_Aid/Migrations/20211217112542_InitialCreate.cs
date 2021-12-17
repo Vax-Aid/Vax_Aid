@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Vax_Aid.Data.Migrations
+namespace Vax_Aid.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,6 +45,39 @@ namespace Vax_Aid.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserDetails",
+                columns: table => new
+                {
+                    UserDetailsId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Phone = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserDetails", x => x.UserDetailsId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VaccineInfos",
+                columns: table => new
+                {
+                    VaccineId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    vaccineName = table.Column<string>(maxLength: 255, nullable: false),
+                    CountryMade = table.Column<string>(nullable: true),
+                    DoseType = table.Column<string>(nullable: true),
+                    ManufacturedBy = table.Column<string>(nullable: true),
+                    ManufacturedDate = table.Column<DateTime>(nullable: false),
+                    Delete = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VaccineInfos", x => x.VaccineId);
                 });
 
             migrationBuilder.CreateTable(
@@ -153,6 +186,34 @@ namespace Vax_Aid.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "BookingDetails",
+                columns: table => new
+                {
+                    BookingDetailsId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    VaccineId = table.Column<int>(nullable: false),
+                    UserDetailsId = table.Column<int>(nullable: false),
+                    Location = table.Column<string>(nullable: true),
+                    Conformation = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookingDetails", x => x.BookingDetailsId);
+                    table.ForeignKey(
+                        name: "FK_BookingDetails_UserDetails_UserDetailsId",
+                        column: x => x.UserDetailsId,
+                        principalTable: "UserDetails",
+                        principalColumn: "UserDetailsId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookingDetails_VaccineInfos_VaccineId",
+                        column: x => x.VaccineId,
+                        principalTable: "VaccineInfos",
+                        principalColumn: "VaccineId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -191,6 +252,16 @@ namespace Vax_Aid.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookingDetails_UserDetailsId",
+                table: "BookingDetails",
+                column: "UserDetailsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookingDetails_VaccineId",
+                table: "BookingDetails",
+                column: "VaccineId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -211,10 +282,19 @@ namespace Vax_Aid.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "BookingDetails");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "UserDetails");
+
+            migrationBuilder.DropTable(
+                name: "VaccineInfos");
         }
     }
 }
