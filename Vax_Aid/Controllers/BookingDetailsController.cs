@@ -55,8 +55,7 @@ namespace Vax_Aid.Controllers
         }
 
         // POST: BookingDetails/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BookingDetailsId,VaccineId,UserDetailsId,Location,Conformation")] BookingDetails bookingDetails)
@@ -91,8 +90,7 @@ namespace Vax_Aid.Controllers
         }
 
         // POST: BookingDetails/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BookingDetailsId,VaccineId,UserDetailsId,Location,Conformation")] BookingDetails bookingDetails)

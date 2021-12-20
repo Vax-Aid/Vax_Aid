@@ -50,8 +50,6 @@ namespace Vax_Aid.Controllers
         }
 
         // POST: UserDetails/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserDetailsId,UserName,Email,Phone")] UserDetails userDetails)
@@ -82,8 +80,6 @@ namespace Vax_Aid.Controllers
         }
 
         // POST: UserDetails/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("UserDetailsId,UserName,Email,Phone")] UserDetails userDetails)
