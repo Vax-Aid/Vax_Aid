@@ -53,7 +53,7 @@ namespace Vax_Aid.Migrations
                 {
                     UserDetailsId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Phone = table.Column<decimal>(nullable: false)
                 },

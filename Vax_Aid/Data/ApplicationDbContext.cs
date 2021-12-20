@@ -16,6 +16,8 @@ namespace Vax_Aid.Data
         public DbSet<VaccineInfo> VaccineInfos { get; set; }
         public DbSet<UserDetails> UserDetails { get; set; }
         public DbSet<BookingDetails> BookingDetails { get; set; }
+        public DbSet<VendorDetails> VendorDetails { get; set; }
+
 
 
     }

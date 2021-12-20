@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Vax_Aid.Models.VaccineInfo>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<table id="vaccineInfoDatatable" class="table table-striped table-bordered dt-responsive nowrap">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.vaccineName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryMade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoseType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ManufacturedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ManufacturedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Delete)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vaccineName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountryMade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoseType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ManufacturedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ManufacturedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Delete)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.VaccineId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.VaccineId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.VaccineId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts
+{
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#vaccineInfoDatatable').dataTable({
+            });
+        });
+    </script>
+
+}
+
+

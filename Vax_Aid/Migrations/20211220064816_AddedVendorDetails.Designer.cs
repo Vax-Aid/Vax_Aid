@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vax_Aid.Data;
 
 namespace Vax_Aid.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211220064816_AddedVendorDetails")]
+    partial class AddedVendorDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,15 +259,11 @@ namespace Vax_Aid.Migrations
 
                     b.Property<bool>("VaccineAvailability");
 
-                    b.Property<int>("VaccineId");
-
                     b.Property<string>("VendorLocation");
 
                     b.Property<string>("VendorName");
 
                     b.HasKey("VendorDetailsId");
-
-                    b.HasIndex("VaccineId");
 
                     b.ToTable("VendorDetails");
                 });
@@ -322,14 +320,6 @@ namespace Vax_Aid.Migrations
                         .HasForeignKey("UserDetailsId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Vax_Aid.Models.VaccineInfo", "vaccineInfo")
-                        .WithMany()
-                        .HasForeignKey("VaccineId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Vax_Aid.Models.VendorDetails", b =>
-                {
                     b.HasOne("Vax_Aid.Models.VaccineInfo", "vaccineInfo")
                         .WithMany()
                         .HasForeignKey("VaccineId")

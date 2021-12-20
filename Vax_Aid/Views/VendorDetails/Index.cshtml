@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Vax_Aid.Models.VendorDetails>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<table id="vendorDetailsDatatable" class="table table-striped table-bordered dt-responsive nowrap">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VaccineAvailability)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vaccineInfo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VendorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VendorLocation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VaccineAvailability)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vaccineInfo.vaccineName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.VendorDetailsId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.VendorDetailsId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.VendorDetailsId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts
+{
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#vendorDetailsDatatable').dataTable({
+            });
+        });
+    </script>
+}
