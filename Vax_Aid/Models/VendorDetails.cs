@@ -11,7 +11,8 @@ namespace Vax_Aid.Models
         [Key]
         public int VendorDetailsId { get; set; }
         public string VendorName { get; set; }
-        public string VendorLocation { get; set; }
+        public VendorLocation VendorLocation { get; set; }
+        public int LocationId { get; set; }
         public bool VaccineAvailability { get; set; }
         public VaccineInfo vaccineInfo { get; set; }
         public int VaccineId { get; set; }

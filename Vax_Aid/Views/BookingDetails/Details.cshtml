@@ -18,16 +18,22 @@
             @Html.DisplayFor(model => model.vaccineInfo.vaccineName)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.Dose)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dose)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.UserDetails)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.UserDetails.UserDetailsId)
+            @Html.DisplayFor(model => model.UserDetails.UserName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Location)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Location)
+            @Html.DisplayFor(model => model.Location.Municipality)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Conformation)

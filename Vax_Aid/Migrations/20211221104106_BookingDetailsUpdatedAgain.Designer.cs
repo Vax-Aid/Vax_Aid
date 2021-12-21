@@ -10,8 +10,8 @@ using Vax_Aid.Data;
 namespace Vax_Aid.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211220064816_AddedVendorDetails")]
-    partial class AddedVendorDetails
+    [Migration("20211221104106_BookingDetailsUpdatedAgain")]
+    partial class BookingDetailsUpdatedAgain
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -186,6 +186,27 @@ namespace Vax_Aid.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Vax_Aid.Models.Address", b =>
+                {
+                    b.Property<int>("AddressId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("District");
+
+                    b.Property<string>("Municipality");
+
+                    b.Property<string>("Provience");
+
+                    b.Property<string>("Tole");
+
+                    b.Property<int>("WardNo");
+
+                    b.HasKey("AddressId");
+
+                    b.ToTable("Addresses");
+                });
+
             modelBuilder.Entity("Vax_Aid.Models.BookingDetails", b =>
                 {
                     b.Property<int>("BookingDetailsId")
@@ -194,13 +215,17 @@ namespace Vax_Aid.Migrations
 
                     b.Property<bool>("Conformation");
 
-                    b.Property<string>("Location");
+                    b.Property<string>("Dose");
+
+                    b.Property<int>("LocationId");
 
                     b.Property<int>("UserDetailsId");
 
                     b.Property<int>("VaccineId");
 
                     b.HasKey("BookingDetailsId");
+
+                    b.HasIndex("LocationId");
 
                     b.HasIndex("UserDetailsId");
 
@@ -215,13 +240,35 @@ namespace Vax_Aid.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AddressId");
+
+                    b.Property<DateTime>("DateofBirth");
+
+                    b.Property<bool>("Disability");
+
                     b.Property<string>("Email");
+
+                    b.Property<string>("Ethnicity");
+
+                    b.Property<string>("Gender");
+
+                    b.Property<string>("IdentityNo");
+
+                    b.Property<string>("IdentityType");
+
+                    b.Property<string>("MedicalConditions");
+
+                    b.Property<string>("Nationality");
+
+                    b.Property<string>("Occupation");
 
                     b.Property<decimal>("Phone");
 
                     b.Property<string>("UserName");
 
                     b.HasKey("UserDetailsId");
+
+                    b.HasIndex("AddressId");
 
                     b.ToTable("UserDetails");
                 });
@@ -257,15 +304,42 @@ namespace Vax_Aid.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("LocationId");
+
                     b.Property<bool>("VaccineAvailability");
 
-                    b.Property<string>("VendorLocation");
+                    b.Property<int>("VaccineId");
 
                     b.Property<string>("VendorName");
 
                     b.HasKey("VendorDetailsId");
 
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("VaccineId");
+
                     b.ToTable("VendorDetails");
+                });
+
+            modelBuilder.Entity("Vax_Aid.Models.VendorLocation", b =>
+                {
+                    b.Property<int>("LocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("District");
+
+                    b.Property<string>("Municipality");
+
+                    b.Property<string>("Provience");
+
+                    b.Property<string>("Tole");
+
+                    b.Property<int>("WardNo");
+
+                    b.HasKey("LocationId");
+
+                    b.ToTable("VendorLocation");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -315,9 +389,35 @@ namespace Vax_Aid.Migrations
 
             modelBuilder.Entity("Vax_Aid.Models.BookingDetails", b =>
                 {
+                    b.HasOne("Vax_Aid.Models.VendorLocation", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Vax_Aid.Models.UserDetails", "UserDetails")
                         .WithMany()
                         .HasForeignKey("UserDetailsId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Vax_Aid.Models.VaccineInfo", "vaccineInfo")
+                        .WithMany()
+                        .HasForeignKey("VaccineId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Vax_Aid.Models.UserDetails", b =>
+                {
+                    b.HasOne("Vax_Aid.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Vax_Aid.Models.VendorDetails", b =>
+                {
+                    b.HasOne("Vax_Aid.Models.VendorLocation", "VendorLocation")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Vax_Aid.Models.VaccineInfo", "vaccineInfo")

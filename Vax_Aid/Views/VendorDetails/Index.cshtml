@@ -37,7 +37,7 @@
                     @Html.DisplayFor(modelItem => item.VendorName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.VendorLocation)
+                    @Html.DisplayFor(modelItem => item.VendorLocation.Municipality)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.VaccineAvailability)
@@ -64,4 +64,5 @@
             });
         });
     </script>
+
 }

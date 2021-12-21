@@ -9,6 +9,23 @@ namespace Vax_Aid.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    AddressId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Provience = table.Column<string>(nullable: true),
+                    District = table.Column<string>(nullable: true),
+                    Municipality = table.Column<string>(nullable: true),
+                    WardNo = table.Column<int>(nullable: false),
+                    Tole = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.AddressId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -48,21 +65,6 @@ namespace Vax_Aid.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserDetails",
-                columns: table => new
-                {
-                    UserDetailsId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Phone = table.Column<decimal>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserDetails", x => x.UserDetailsId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "VaccineInfos",
                 columns: table => new
                 {
@@ -78,6 +80,54 @@ namespace Vax_Aid.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_VaccineInfos", x => x.VaccineId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VendorLocation",
+                columns: table => new
+                {
+                    LocationId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Provience = table.Column<string>(nullable: true),
+                    District = table.Column<string>(nullable: true),
+                    Municipality = table.Column<string>(nullable: true),
+                    WardNo = table.Column<int>(nullable: false),
+                    Tole = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VendorLocation", x => x.LocationId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserDetails",
+                columns: table => new
+                {
+                    UserDetailsId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserName = table.Column<string>(nullable: true),
+                    Ethnicity = table.Column<string>(nullable: true),
+                    Gender = table.Column<string>(nullable: true),
+                    DateofBirth = table.Column<DateTime>(nullable: false),
+                    AddressId = table.Column<int>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    Phone = table.Column<decimal>(nullable: false),
+                    Nationality = table.Column<string>(nullable: true),
+                    IdentityType = table.Column<string>(nullable: true),
+                    IdentityNo = table.Column<string>(nullable: true),
+                    Occupation = table.Column<string>(nullable: true),
+                    MedicalConditions = table.Column<string>(nullable: true),
+                    Disability = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserDetails", x => x.UserDetailsId);
+                    table.ForeignKey(
+                        name: "FK_UserDetails_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "AddressId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -187,6 +237,34 @@ namespace Vax_Aid.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "VendorDetails",
+                columns: table => new
+                {
+                    VendorDetailsId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    VendorName = table.Column<string>(nullable: true),
+                    LocationId = table.Column<int>(nullable: false),
+                    VaccineAvailability = table.Column<bool>(nullable: false),
+                    VaccineId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VendorDetails", x => x.VendorDetailsId);
+                    table.ForeignKey(
+                        name: "FK_VendorDetails_VendorLocation_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "VendorLocation",
+                        principalColumn: "LocationId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_VendorDetails_VaccineInfos_VaccineId",
+                        column: x => x.VaccineId,
+                        principalTable: "VaccineInfos",
+                        principalColumn: "VaccineId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BookingDetails",
                 columns: table => new
                 {
@@ -194,12 +272,18 @@ namespace Vax_Aid.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     VaccineId = table.Column<int>(nullable: false),
                     UserDetailsId = table.Column<int>(nullable: false),
-                    Location = table.Column<string>(nullable: true),
+                    LocationId = table.Column<int>(nullable: false),
                     Conformation = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BookingDetails", x => x.BookingDetailsId);
+                    table.ForeignKey(
+                        name: "FK_BookingDetails_VendorLocation_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "VendorLocation",
+                        principalColumn: "LocationId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_BookingDetails_UserDetails_UserDetailsId",
                         column: x => x.UserDetailsId,
@@ -254,6 +338,11 @@ namespace Vax_Aid.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BookingDetails_LocationId",
+                table: "BookingDetails",
+                column: "LocationId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BookingDetails_UserDetailsId",
                 table: "BookingDetails",
                 column: "UserDetailsId");
@@ -261,6 +350,21 @@ namespace Vax_Aid.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_BookingDetails_VaccineId",
                 table: "BookingDetails",
+                column: "VaccineId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserDetails_AddressId",
+                table: "UserDetails",
+                column: "AddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VendorDetails_LocationId",
+                table: "VendorDetails",
+                column: "LocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VendorDetails_VaccineId",
+                table: "VendorDetails",
                 column: "VaccineId");
         }
 
@@ -285,6 +389,9 @@ namespace Vax_Aid.Migrations
                 name: "BookingDetails");
 
             migrationBuilder.DropTable(
+                name: "VendorDetails");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -294,7 +401,13 @@ namespace Vax_Aid.Migrations
                 name: "UserDetails");
 
             migrationBuilder.DropTable(
+                name: "VendorLocation");
+
+            migrationBuilder.DropTable(
                 name: "VaccineInfos");
+
+            migrationBuilder.DropTable(
+                name: "Addresses");
         }
     }
 }

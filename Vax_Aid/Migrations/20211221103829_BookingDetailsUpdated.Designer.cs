@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vax_Aid.Data;
 
 namespace Vax_Aid.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211221103829_BookingDetailsUpdated")]
+    partial class BookingDetailsUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -215,7 +217,9 @@ namespace Vax_Aid.Migrations
 
                     b.Property<string>("Dose");
 
-                    b.Property<int>("LocationId");
+                    b.Property<int?>("LocationId");
+
+                    b.Property<string>("Municipality");
 
                     b.Property<int>("UserDetailsId");
 
@@ -262,9 +266,7 @@ namespace Vax_Aid.Migrations
 
                     b.Property<decimal>("Phone");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(255);
+                    b.Property<string>("UserName");
 
                     b.HasKey("UserDetailsId");
 
@@ -391,8 +393,7 @@ namespace Vax_Aid.Migrations
                 {
                     b.HasOne("Vax_Aid.Models.VendorLocation", "Location")
                         .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("LocationId");
 
                     b.HasOne("Vax_Aid.Models.UserDetails", "UserDetails")
                         .WithMany()

@@ -22,7 +22,7 @@ namespace Vax_Aid.Controllers
         // GET: VendorDetails
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.VendorDetails.Include(v => v.vaccineInfo);
+            var applicationDbContext = _context.VendorDetails.Include(v => v.VendorLocation).Include(v => v.vaccineInfo);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,6 +35,7 @@ namespace Vax_Aid.Controllers
             }
 
             var vendorDetails = await _context.VendorDetails
+                .Include(v => v.VendorLocation)
                 .Include(v => v.vaccineInfo)
                 .FirstOrDefaultAsync(m => m.VendorDetailsId == id);
             if (vendorDetails == null)
@@ -48,6 +49,7 @@ namespace Vax_Aid.Controllers
         // GET: VendorDetails/Create
         public IActionResult Create()
         {
+            ViewData["LocationId"] = new SelectList(_context.VendorLocation, "LocationId", "Municipality");
             ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName");
             return View();
         }
@@ -55,7 +57,7 @@ namespace Vax_Aid.Controllers
         // POST: VendorDetails/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VendorDetailsId,VendorName,VendorLocation,VaccineAvailability,VaccineId")] VendorDetails vendorDetails)
+        public async Task<IActionResult> Create([Bind("VendorDetailsId,VendorName,LocationId,VaccineAvailability,VaccineId")] VendorDetails vendorDetails)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +65,7 @@ namespace Vax_Aid.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["LocationId"] = new SelectList(_context.VendorLocation, "LocationId", "Municipality", vendorDetails.LocationId);
             ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName", vendorDetails.VaccineId);
             return View(vendorDetails);
         }
@@ -80,6 +83,7 @@ namespace Vax_Aid.Controllers
             {
                 return NotFound();
             }
+            ViewData["LocationId"] = new SelectList(_context.VendorLocation, "LocationId", "Municipality", vendorDetails.LocationId);
             ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName", vendorDetails.VaccineId);
             return View(vendorDetails);
         }
@@ -87,7 +91,7 @@ namespace Vax_Aid.Controllers
         // POST: VendorDetails/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VendorDetailsId,VendorName,VendorLocation,VaccineAvailability,VaccineId")] VendorDetails vendorDetails)
+        public async Task<IActionResult> Edit(int id, [Bind("VendorDetailsId,VendorName,LocationId,VaccineAvailability,VaccineId")] VendorDetails vendorDetails)
         {
             if (id != vendorDetails.VendorDetailsId)
             {
@@ -114,6 +118,7 @@ namespace Vax_Aid.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["LocationId"] = new SelectList(_context.VendorLocation, "LocationId", "Municipality", vendorDetails.LocationId);
             ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName", vendorDetails.VaccineId);
             return View(vendorDetails);
         }
@@ -127,6 +132,7 @@ namespace Vax_Aid.Controllers
             }
 
             var vendorDetails = await _context.VendorDetails
+                .Include(v => v.VendorLocation)
                 .Include(v => v.vaccineInfo)
                 .FirstOrDefaultAsync(m => m.VendorDetailsId == id);
             if (vendorDetails == null)

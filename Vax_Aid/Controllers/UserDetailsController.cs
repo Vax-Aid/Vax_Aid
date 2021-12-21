@@ -22,7 +22,8 @@ namespace Vax_Aid.Controllers
         // GET: UserDetails
         public async Task<IActionResult> Index()
         {
-            return View(await _context.UserDetails.ToListAsync());
+            var applicationDbContext = _context.UserDetails.Include(u => u.Address);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: UserDetails/Details/5
@@ -34,6 +35,7 @@ namespace Vax_Aid.Controllers
             }
 
             var userDetails = await _context.UserDetails
+                .Include(u => u.Address)
                 .FirstOrDefaultAsync(m => m.UserDetailsId == id);
             if (userDetails == null)
             {
@@ -46,13 +48,14 @@ namespace Vax_Aid.Controllers
         // GET: UserDetails/Create
         public IActionResult Create()
         {
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "District");
             return View();
         }
 
         // POST: UserDetails/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserDetailsId,UserName,Email,Phone")] UserDetails userDetails)
+        public async Task<IActionResult> Create([Bind("UserDetailsId,UserName,Ethnicity,Gender,DateofBirth,AddressId,Email,Phone,Nationality,IdentityType,IdentityNo,Occupation,MedicalConditions,Disability")] UserDetails userDetails)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +63,7 @@ namespace Vax_Aid.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "District", userDetails.AddressId);
             return View(userDetails);
         }
 
@@ -76,13 +80,14 @@ namespace Vax_Aid.Controllers
             {
                 return NotFound();
             }
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "District", userDetails.AddressId);
             return View(userDetails);
         }
 
-        // POST: UserDetails/Edit/5
+        // POST: UserDetails/Edit/5.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserDetailsId,UserName,Email,Phone")] UserDetails userDetails)
+        public async Task<IActionResult> Edit(int id, [Bind("UserDetailsId,UserName,Ethnicity,Gender,DateofBirth,AddressId,Email,Phone,Nationality,IdentityType,IdentityNo,Occupation,MedicalConditions,Disability")] UserDetails userDetails)
         {
             if (id != userDetails.UserDetailsId)
             {
@@ -109,6 +114,7 @@ namespace Vax_Aid.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "District", userDetails.AddressId);
             return View(userDetails);
         }
 
@@ -121,6 +127,7 @@ namespace Vax_Aid.Controllers
             }
 
             var userDetails = await _context.UserDetails
+                .Include(u => u.Address)
                 .FirstOrDefaultAsync(m => m.UserDetailsId == id);
             if (userDetails == null)
             {

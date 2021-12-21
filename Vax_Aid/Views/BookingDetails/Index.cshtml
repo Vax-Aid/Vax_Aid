@@ -18,6 +18,9 @@
                 @Html.DisplayNameFor(model => model.vaccineInfo)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Dose)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.UserDetails)
             </th>
             <th>
@@ -37,10 +40,13 @@
                     @Html.DisplayFor(modelItem => item.vaccineInfo.vaccineName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UserDetails.UserDetailsId)
+                    @Html.DisplayFor(modelItem => item.Dose)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Location)
+                    @Html.DisplayFor(modelItem => item.UserDetails.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location.Municipality)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Conformation)
@@ -64,4 +70,5 @@
             });
         });
     </script>
+
 }

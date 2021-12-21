@@ -8,13 +8,16 @@ namespace Vax_Aid.Models
 {
     public class BookingDetails
     {
+        
         [Key]
         public int BookingDetailsId { get; set; }
         public VaccineInfo vaccineInfo { get; set; }
         public int VaccineId { get; set; }
+        public string Dose { get; set; }
         public UserDetails UserDetails { get; set; }
         public int UserDetailsId { get; set; }
-        public string Location { get; set; }
+        public VendorLocation Location { get; set; }
+        public int LocationId { get; set; }
         public bool Conformation { get; set; }
     }
 }
