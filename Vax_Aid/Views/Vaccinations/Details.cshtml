@@ -1,0 +1,37 @@
+﻿@model Vax_Aid.Models.Vaccination
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vaccination</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.vaccineInfo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.vaccineInfo.vaccineName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SerialNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.userDetails)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.userDetails.UserName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.VaccinationId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
