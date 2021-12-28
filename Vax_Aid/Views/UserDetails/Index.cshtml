@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+   
 }
 
 <h2>Index</h2>
@@ -11,112 +11,114 @@
     <a asp-action="Create">Create New</a>
 </p>
 <link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-<table id="userDetailsDatatable" class="table table-striped table-bordered dt-responsive nowrap">
+<div style="overflow: auto;">
+    <table id="userDetailsDatatable" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%;">
 
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ethnicity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateofBirth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nationality)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentityType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentityNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Occupation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MedicalConditions)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Disability)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ethnicity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Gender)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateofBirth)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address.District)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nationality)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdentityType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdentityNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Occupation)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MedicalConditions)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Disability)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.UserDetailsId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.UserDetailsId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.UserDetailsId">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ethnicity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateofBirth)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nationality)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdentityType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdentityNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Occupation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MedicalConditions)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Disability)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-@section Scripts
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ethnicity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateofBirth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address.District)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nationality)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdentityType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdentityNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Occupation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MedicalConditions)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Disability)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.UserDetailsId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.UserDetailsId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.UserDetailsId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+    @section Scripts
 {
-    <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
-    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#userDetailsDatatable').dataTable({
+        <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
+        <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#userDetailsDatatable').dataTable({
+                });
             });
-        });
-    </script>
-}
+        </script>
+    }

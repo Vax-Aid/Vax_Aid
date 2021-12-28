@@ -55,8 +55,6 @@ namespace Vax_Aid.Controllers
         }
 
         // POST: Vaccinations/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("VaccinationId,VaccineId,SerialNumber,UserDetailsId")] Vaccination vaccination)
@@ -91,8 +89,6 @@ namespace Vax_Aid.Controllers
         }
 
         // POST: Vaccinations/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("VaccinationId,VaccineId,SerialNumber,UserDetailsId")] Vaccination vaccination)

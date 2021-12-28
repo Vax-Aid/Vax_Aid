@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\NewFolder1\**" />
+    <Content Remove="wwwroot\NewFolder1\**" />
+    <EmbeddedResource Remove="wwwroot\NewFolder1\**" />
+    <None Remove="wwwroot\NewFolder1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="C:\Users\nischal uprety\.nuget\packages\datatables.net\1.11.3\contentFiles\any\any\wwwroot\js\jquery.dataTables.js" />
     <Content Remove="C:\Users\nischal uprety\.nuget\packages\datatables.net\1.11.3\contentFiles\any\any\wwwroot\js\jquery.dataTables.min.js" />
   </ItemGroup>
@@ -25,6 +32,122 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\theme\assets\advanced-datatable\media\js\jquery.dataTables.js" />
+    <None Include="wwwroot\theme\assets\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
+    <None Include="wwwroot\theme\assets\bootstrap-datepicker\js\bootstrap-datepicker.js" />
+    <None Include="wwwroot\theme\assets\bootstrap-daterangepicker\date.js" />
+    <None Include="wwwroot\theme\assets\bootstrap-daterangepicker\daterangepicker.js" />
+    <None Include="wwwroot\theme\assets\bootstrap-daterangepicker\moment.min.js" />
+    <None Include="wwwroot\theme\assets\bootstrap-datetimepicker\js\bootstrap-datetimepicker.js" />
+    <None Include="wwwroot\theme\assets\bootstrap-fileupload\bootstrap-fileupload.js" />
+    <None Include="wwwroot\theme\assets\bootstrap-inputmask\bootstrap-inputmask.min.js" />
+    <None Include="wwwroot\theme\assets\bootstrap-switch\static\js\bootstrap-switch.js" />
+    <None Include="wwwroot\theme\assets\bootstrap-timepicker\js\bootstrap-timepicker.js" />
+    <None Include="wwwroot\theme\assets\bootstrap-wysihtml5\bootstrap-wysihtml5.js" />
+    <None Include="wwwroot\theme\assets\bootstrap-wysihtml5\wysihtml5-0.3.0.js" />
+    <None Include="wwwroot\theme\assets\chart-master\Chart.js" />
+    <None Include="wwwroot\theme\assets\ckeditor\ckeditor.js" />
+    <None Include="wwwroot\theme\assets\data-tables\DT_bootstrap.js" />
+    <None Include="wwwroot\theme\assets\data-tables\jquery.dataTables.js" />
+    <None Include="wwwroot\theme\assets\dropzone\dropzone.js" />
+    <None Include="wwwroot\theme\assets\fancybox\source\jquery.fancybox.js" />
+    <None Include="wwwroot\theme\assets\file-uploader\js\jquery.fileupload-audio.js" />
+    <None Include="wwwroot\theme\assets\file-uploader\js\jquery.fileupload-image.js" />
+    <None Include="wwwroot\theme\assets\file-uploader\js\jquery.fileupload-process.js" />
+    <None Include="wwwroot\theme\assets\file-uploader\js\jquery.fileupload-ui.js" />
+    <None Include="wwwroot\theme\assets\file-uploader\js\jquery.fileupload-validate.js" />
+    <None Include="wwwroot\theme\assets\file-uploader\js\jquery.fileupload-video.js" />
+    <None Include="wwwroot\theme\assets\file-uploader\js\jquery.fileupload.js" />
+    <None Include="wwwroot\theme\assets\file-uploader\js\jquery.iframe-transport.js" />
+    <None Include="wwwroot\theme\assets\file-uploader\js\main.js" />
+    <None Include="wwwroot\theme\assets\file-uploader\js\vendor\jquery.ui.widget.js" />
+    <None Include="wwwroot\theme\assets\flot\jquery.flot.crosshair.js" />
+    <None Include="wwwroot\theme\assets\flot\jquery.flot.js" />
+    <None Include="wwwroot\theme\assets\flot\jquery.flot.pie.js" />
+    <None Include="wwwroot\theme\assets\flot\jquery.flot.resize.js" />
+    <None Include="wwwroot\theme\assets\flot\jquery.flot.stack.js" />
+    <None Include="wwwroot\theme\assets\font-awesome\fonts\fontawesome-webfontba72.svg" />
+    <None Include="wwwroot\theme\assets\fuelux\js\spinner.min.js" />
+    <None Include="wwwroot\theme\assets\fuelux\js\tree.min.js" />
+    <None Include="wwwroot\theme\assets\fullcalendar\fullcalendar\fullcalendar.min.js" />
+    <None Include="wwwroot\theme\assets\gritter\js\jquery.gritter.js" />
+    <None Include="wwwroot\theme\assets\jcrop\js\jquery.color.js" />
+    <None Include="wwwroot\theme\assets\jcrop\js\jquery.Jcrop.min.js" />
+    <None Include="wwwroot\theme\assets\jquery-easy-pie-chart\jquery.easy-pie-chart.js" />
+    <None Include="wwwroot\theme\assets\jquery-file-upload\js\jquery.fileupload-fp.js" />
+    <None Include="wwwroot\theme\assets\jquery-file-upload\js\jquery.fileupload-ui.js" />
+    <None Include="wwwroot\theme\assets\jquery-file-upload\js\jquery.fileupload.js" />
+    <None Include="wwwroot\theme\assets\jquery-file-upload\js\jquery.iframe-transport.js" />
+    <None Include="wwwroot\theme\assets\jquery-file-upload\js\vendor\canvas-to-blob.min.js" />
+    <None Include="wwwroot\theme\assets\jquery-file-upload\js\vendor\jquery.ui.widget.js" />
+    <None Include="wwwroot\theme\assets\jquery-file-upload\js\vendor\load-image.min.js" />
+    <None Include="wwwroot\theme\assets\jquery-file-upload\js\vendor\tmpl.min.js" />
+    <None Include="wwwroot\theme\assets\jquery-knob\js\jquery.knob.js" />
+    <None Include="wwwroot\theme\assets\jquery-multi-select\js\jquery.multi-select.js" />
+    <None Include="wwwroot\theme\assets\jquery-multi-select\js\jquery.quicksearch.js" />
+    <None Include="wwwroot\theme\assets\jquery-ui\jquery-ui-1.10.1.custom.min.js" />
+    <None Include="wwwroot\theme\assets\morris.js-0.4.3\morris.min.js" />
+    <None Include="wwwroot\theme\assets\morris.js-0.4.3\raphael-min.js" />
+    <None Include="wwwroot\theme\assets\nestable\jquery.nestable.js" />
+    <None Include="wwwroot\theme\assets\select2\js\select2.min.js" />
+    <None Include="wwwroot\theme\assets\summernote\dist\summernote.min.js" />
+    <None Include="wwwroot\theme\assets\switchery\switchery.js" />
+    <None Include="wwwroot\theme\assets\toastr-master\toastr.js" />
+    <None Include="wwwroot\theme\assets\xchart\d3.v3.min.js" />
+    <None Include="wwwroot\theme\assets\xchart\xcharts.min.js" />
+    <None Include="wwwroot\theme\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\theme\js\advanced-form-components.js" />
+    <None Include="wwwroot\theme\js\all-chartjs.js" />
+    <None Include="wwwroot\theme\js\bootstrap-switch.js" />
+    <None Include="wwwroot\theme\js\bootstrap-validator.min.js" />
+    <None Include="wwwroot\theme\js\bootstrap.min.js" />
+    <None Include="wwwroot\theme\js\common-scripts.js" />
+    <None Include="wwwroot\theme\js\count.js" />
+    <None Include="wwwroot\theme\js\draggable-portlet.js" />
+    <None Include="wwwroot\theme\js\dynamic_table_init.js" />
+    <None Include="wwwroot\theme\js\easy-pie-chart.js" />
+    <None Include="wwwroot\theme\js\editable-table.js" />
+    <None Include="wwwroot\theme\js\external-dragging-calendar.js" />
+    <None Include="wwwroot\theme\js\flot-chart.js" />
+    <None Include="wwwroot\theme\js\form-component.js" />
+    <None Include="wwwroot\theme\js\form-image-crop.js" />
+    <None Include="wwwroot\theme\js\form-validation-script.js" />
+    <None Include="wwwroot\theme\js\ga.js" />
+    <None Include="wwwroot\theme\js\gmaps-scripts.js" />
+    <None Include="wwwroot\theme\js\gmaps.js" />
+    <None Include="wwwroot\theme\js\gritter.js" />
+    <None Include="wwwroot\theme\js\hover-dropdown.js" />
+    <None Include="wwwroot\theme\js\jquery-migrate-1.2.1.min.js" />
+    <None Include="wwwroot\theme\js\jquery-ui-1.9.2.custom.min.js" />
+    <None Include="wwwroot\theme\js\jquery.customSelect.min.js" />
+    <None Include="wwwroot\theme\js\jquery.dcjqaccordion.2.7.js" />
+    <None Include="wwwroot\theme\js\jquery.js" />
+    <None Include="wwwroot\theme\js\jquery.nicescroll.js" />
+    <None Include="wwwroot\theme\js\jquery.pulsate.min.js" />
+    <None Include="wwwroot\theme\js\jquery.scrollTo.min.js" />
+    <None Include="wwwroot\theme\js\jquery.sparkline.js" />
+    <None Include="wwwroot\theme\js\jquery.steps.min.js" />
+    <None Include="wwwroot\theme\js\jquery.stepy.js" />
+    <None Include="wwwroot\theme\js\jquery.tagsinput.js" />
+    <None Include="wwwroot\theme\js\jquery.ui.touch-punch.min.js" />
+    <None Include="wwwroot\theme\js\jquery.validate.min.js" />
+    <None Include="wwwroot\theme\js\modernizr.custom.js" />
+    <None Include="wwwroot\theme\js\morris-script.js" />
+    <None Include="wwwroot\theme\js\nestable.js" />
+    <None Include="wwwroot\theme\js\owl.carousel.js" />
+    <None Include="wwwroot\theme\js\pulstate.js" />
+    <None Include="wwwroot\theme\js\respond.min.js" />
+    <None Include="wwwroot\theme\js\slidebars.min.js" />
+    <None Include="wwwroot\theme\js\sliders.js" />
+    <None Include="wwwroot\theme\js\soon\custom.js" />
+    <None Include="wwwroot\theme\js\soon\plugins.js" />
+    <None Include="wwwroot\theme\js\sparkline-chart.js" />
+    <None Include="wwwroot\theme\js\tasks.js" />
+    <None Include="wwwroot\theme\js\toucheffects.js" />
+    <None Include="wwwroot\theme\js\tree.js" />
   </ItemGroup>
 
 </Project>
