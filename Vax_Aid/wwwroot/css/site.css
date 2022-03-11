@@ -134,9 +134,10 @@ button[type=button], select {
     display: block;
     float: left;
 }
-.footer {
-    height: 200px;
+.footer-div {
+    height: 150px;
     width: 100%;
+    padding-top:10px;
     margin-top: 900px;
     display: block;
     background: #f69494;
@@ -146,9 +147,7 @@ button[type=button], select {
     color: #ffffff;
     border-bottom: 7px solid #28808c;
     border-radius: 5px;
-    height: 5%;
-    width: 100%;
-    text-align: center;
+    text-align:center;
 }
 
 
