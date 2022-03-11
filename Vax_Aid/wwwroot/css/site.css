@@ -63,14 +63,92 @@ body {
     background:#c8d6fa;
     margin-top: 20px;
     display: block;
-    block-size: 500px;
+    height:800px;
+    width:900px;
     border-radius: 5px;
+    float:left;
+    margin-left:180px;
 }
+.vax-form #vax-form-info{
+    color:black;
+    font-display:block;
+    font-family: sans-serif,Poppins;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-right:40px;
+    text-align: justify;
+}
+.form-information{
+    margin-top:100px;
+}
+
+.select-vaccination {
+    padding-right: 80px;
+    margin-left: 20px;
+    font-family: sans-serif,poppins;
+    font-size: 30px;
+    color: #f69494;
+}
+.select-location {
+    margin-left:20px;
+    margin-top: 20px;
+    font-family: sans-serif,poppins;
+    font-size: 30px;
+    color: #f69494;
+    margin-right:100px;
+}
+.top-div{
+    margin-bottom:140px;
+}
+
+.top-div img{
+    margin-right: 20px;
+    float: left;
+    margin-bottom: 40px;
+}
+
+input[type=text], select {
+    width: 80%;
+    padding: 15px 20px;
+    margin-left:20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+button[type=button], select {
+    margin-top:20px;
+    width: 80%;
+    padding: 15px 20px;
+    margin-left: 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color:black;
+}
+
 .form-back {
-    margin-top: ;
     height: 300px;
     width: 300px;
     display: block;
+    float: left;
+}
+.footer {
+    height: 200px;
+    width: 100%;
+    margin-top: 900px;
+    display: block;
+    background: #f69494;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 12%), 0 1px 4px rgb(0 0 0 / 24%);
+    position: relative;
+    z-index: 1;
+    color: #ffffff;
+    border-bottom: 7px solid #28808c;
+    border-radius: 5px;
+    height: 5%;
+    width: 100%;
+    text-align: center;
 }
 
 
