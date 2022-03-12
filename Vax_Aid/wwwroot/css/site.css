@@ -33,13 +33,13 @@ body {
     display: block;
     background: #f69494;
     box-shadow: 0 1px 6px rgb(0 0 0 / 50%), 0 1px 4px rgb(0 0 0 / 50%);
-    position: relative;
+    position:relative;
     z-index: 1;
     color: #313131;
     border-bottom: 5px solid #28808c;
     border-radius: 5px;
     height: 5%;
-    width: 100%;
+    width: auto;
     text-align:center;
 }
 
@@ -67,10 +67,11 @@ body {
     height: 800px;
     width: 900px;
     border-radius: 5px;
-    float: left;
-    margin-left: 180px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
-.vax-form #vax-form-info{
+.top-div p{
     color:black;
     font-display:block;
     font-family: sans-serif,Poppins;
@@ -79,8 +80,12 @@ body {
     margin-right:40px;
     text-align: justify;
 }
-.form-information{
-    margin-top:100px;
+.top-div h1 {
+    color: #f69494;
+    padding-top:20px;
+}
+.form-div{
+    margin-top:140px;
 }
 
 .select-vaccination {
@@ -98,15 +103,16 @@ body {
     color: #f69494;
     margin-right:100px;
 }
-.top-div{
-    margin-bottom:140px;
-}
 
-.top-div img{
-    margin-right: 20px;
-    float: left;
-    margin-bottom: 40px;
-}
+    .top-div img {
+        margin-right: 20px;
+        float: left;
+        margin-bottom: 40px;
+        height: 300px;
+        width: 300px;
+        display: block;
+        float: left;
+    }
 
 input[type=text], select {
     width: 80%;
@@ -129,20 +135,13 @@ button[type=button], select {
     color:black;
 }
 
-.form-back {
-    height: 300px;
-    width: 300px;
-    display: block;
-    float: left;
-}
 .footer-div {
     height: 150px;
-    width: 100%;
-    padding-top: 10px;
-    margin-top: 840px;
+    width: auto;
+    margin-top: 20px;
     display: block;
     background: #f69494;
-    position: relative;
+    position:relative;
     z-index: 1;
     box-shadow: 0 1px 6px rgb(0 0 0 / 50%), 0px 1px 4px rgb(0 0 0 / 50%);
     color: #ffffff;
@@ -153,7 +152,7 @@ button[type=button], select {
 
 
 /* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 732px) {
     /* Hide captions */
     .carousel-caption {
         display: none;

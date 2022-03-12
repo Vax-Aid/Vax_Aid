@@ -35,6 +35,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\bootstrap-4.3.1-dist\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\bootstrap-4.3.1-dist\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\bootstrap-4.3.1-dist\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\bootstrap-4.3.1-dist\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\bootstrap-4.3.1-dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\bootstrap-4.3.1-dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\bootstrap-4.3.1-dist\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\bootstrap-4.3.1-dist\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\bootstrap-4.3.1-dist\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\bootstrap-4.3.1-dist\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\bootstrap-4.3.1-dist\js\bootstrap.js" />
+    <None Include="wwwroot\bootstrap-4.3.1-dist\js\bootstrap.js.map" />
+    <None Include="wwwroot\bootstrap-4.3.1-dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\bootstrap-4.3.1-dist\js\bootstrap.min.js.map" />
     <None Include="wwwroot\theme\assets\advanced-datatable\media\js\jquery.dataTables.js" />
     <None Include="wwwroot\theme\assets\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
     <None Include="wwwroot\theme\assets\bootstrap-datepicker\js\bootstrap-datepicker.js" />
