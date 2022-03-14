@@ -49,15 +49,15 @@ namespace Vax_Aid.Controllers
         // GET: VendorDetails/Create
         public IActionResult Create()
         {
-            ViewData["LocationId"] = new SelectList(_context.VendorLocation, "LocationId", "Municipality");
-            ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName");
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality");
+            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName");
             return View();
         }
 
         // POST: VendorDetails/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VendorDetailsId,VendorName,LocationId,VaccineAvailability,VaccineId")] VendorDetails vendorDetails)
+        public async Task<IActionResult> Create([Bind("VendorDetailsId,VendorName,VendorLocationId,VaccineAvailability,VaccineInfoId")] VendorDetails vendorDetails)
         {
             if (ModelState.IsValid)
             {
@@ -65,8 +65,8 @@ namespace Vax_Aid.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationId"] = new SelectList(_context.VendorLocation, "LocationId", "Municipality", vendorDetails.LocationId);
-            ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName", vendorDetails.VaccineId);
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality", vendorDetails.VendorLocationId);
+            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", vendorDetails.VaccineInfoId);
             return View(vendorDetails);
         }
 
@@ -83,15 +83,15 @@ namespace Vax_Aid.Controllers
             {
                 return NotFound();
             }
-            ViewData["LocationId"] = new SelectList(_context.VendorLocation, "LocationId", "Municipality", vendorDetails.LocationId);
-            ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName", vendorDetails.VaccineId);
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality", vendorDetails.VendorLocationId);
+            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", vendorDetails.VaccineInfoId);
             return View(vendorDetails);
         }
 
         // POST: VendorDetails/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VendorDetailsId,VendorName,LocationId,VaccineAvailability,VaccineId")] VendorDetails vendorDetails)
+        public async Task<IActionResult> Edit(int id, [Bind("VendorDetailsId,VendorName,VendorLocationId,VaccineAvailability,VaccineInfoId")] VendorDetails vendorDetails)
         {
             if (id != vendorDetails.VendorDetailsId)
             {
@@ -118,8 +118,8 @@ namespace Vax_Aid.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationId"] = new SelectList(_context.VendorLocation, "LocationId", "Municipality", vendorDetails.LocationId);
-            ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName", vendorDetails.VaccineId);
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality", vendorDetails.VendorLocationId);
+            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", vendorDetails.VaccineInfoId);
             return View(vendorDetails);
         }
 

@@ -9,11 +9,12 @@ namespace Vax_Aid.Models
     public class VendorLocation
     {
         [Key]
-        public int LocationId { get; set; }
+        public int VendorLocationId { get; set; }
         public string Provience { get; set; }
         public string District { get; set; }
         public string Municipality { get; set; }
         public int WardNo { get; set; }
         public string Tole { get; set; }
+        public float Distance { get; set; }
     }
 }

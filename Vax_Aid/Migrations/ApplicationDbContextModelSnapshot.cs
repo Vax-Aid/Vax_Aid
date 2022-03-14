@@ -15,29 +15,32 @@ namespace Vax_Aid.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
@@ -47,14 +50,18 @@ namespace Vax_Aid.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<string>("ClaimType");
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue");
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RoleId")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -66,49 +73,63 @@ namespace Vax_Aid.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("AccessFailedCount");
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.Property<bool>("EmailConfirmed");
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
 
-                    b.Property<bool>("LockoutEnabled");
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd");
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("PasswordHash");
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("PhoneNumberConfirmed");
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("SecurityStamp");
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("TwoFactorEnabled");
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
@@ -118,14 +139,18 @@ namespace Vax_Aid.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<string>("ClaimType");
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue");
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -137,15 +162,19 @@ namespace Vax_Aid.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
-                    b.Property<string>("ProviderDisplayName");
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -156,9 +185,11 @@ namespace Vax_Aid.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RoleId");
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -169,15 +200,19 @@ namespace Vax_Aid.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
-                    b.Property<string>("Value");
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
@@ -188,17 +223,26 @@ namespace Vax_Aid.Migrations
                 {
                     b.Property<int>("AddressId")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<string>("District");
+                    b.Property<float>("Distance")
+                        .HasColumnType("real");
 
-                    b.Property<string>("Municipality");
+                    b.Property<string>("District")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Provience");
+                    b.Property<string>("Municipality")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Tole");
+                    b.Property<string>("Provience")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("WardNo");
+                    b.Property<string>("Tole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WardNo")
+                        .HasColumnType("int");
 
                     b.HasKey("AddressId");
 
@@ -209,25 +253,31 @@ namespace Vax_Aid.Migrations
                 {
                     b.Property<int>("BookingDetailsId")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<bool>("Conformation");
+                    b.Property<bool>("Conformation")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("Dose");
+                    b.Property<string>("Dose")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LocationId");
+                    b.Property<int>("UserDetailsId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("UserDetailsId");
+                    b.Property<int>("VaccineInfoId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("VaccineId");
+                    b.Property<int>("VendorLocationId")
+                        .HasColumnType("int");
 
                     b.HasKey("BookingDetailsId");
 
-                    b.HasIndex("LocationId");
-
                     b.HasIndex("UserDetailsId");
 
-                    b.HasIndex("VaccineId");
+                    b.HasIndex("VaccineInfoId");
+
+                    b.HasIndex("VendorLocationId");
 
                     b.ToTable("BookingDetails");
                 });
@@ -236,35 +286,49 @@ namespace Vax_Aid.Migrations
                 {
                     b.Property<int>("UserDetailsId")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<int>("AddressId");
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("DateofBirth");
+                    b.Property<DateTime>("DateofBirth")
+                        .HasColumnType("datetime2");
 
-                    b.Property<bool>("Disability");
+                    b.Property<bool>("Disability")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Ethnicity");
+                    b.Property<string>("Ethnicity")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Gender");
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IdentityNo");
+                    b.Property<string>("IdentityNo")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IdentityType");
+                    b.Property<string>("IdentityType")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MedicalConditions");
+                    b.Property<string>("MedicalConditions")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nationality");
+                    b.Property<string>("Nationality")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Occupation");
+                    b.Property<string>("Occupation")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Phone");
+                    b.Property<decimal>("Phone")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("UserDetailsId");
 
@@ -277,44 +341,55 @@ namespace Vax_Aid.Migrations
                 {
                     b.Property<int>("VaccinationId")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<string>("SerialNumber");
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserDetailsId");
+                    b.Property<int>("UserDetailsId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("VaccineId");
+                    b.Property<int>("VaccineInfoId")
+                        .HasColumnType("int");
 
                     b.HasKey("VaccinationId");
 
                     b.HasIndex("UserDetailsId");
 
-                    b.HasIndex("VaccineId");
+                    b.HasIndex("VaccineInfoId");
 
                     b.ToTable("Vaccinations");
                 });
 
             modelBuilder.Entity("Vax_Aid.Models.VaccineInfo", b =>
                 {
-                    b.Property<int>("VaccineId")
+                    b.Property<int>("VaccineInfoId")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<string>("CountryMade");
+                    b.Property<string>("CountryMade")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Delete");
+                    b.Property<bool>("Delete")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("DoseType");
+                    b.Property<string>("DoseType")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ManufacturedBy");
+                    b.Property<string>("ManufacturedBy")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ManufacturedDate");
+                    b.Property<DateTime>("ManufacturedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("vaccineName")
                         .IsRequired()
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.HasKey("VaccineId");
+                    b.HasKey("VaccineInfoId");
 
                     b.ToTable("VaccineInfos");
                 });
@@ -323,107 +398,136 @@ namespace Vax_Aid.Migrations
                 {
                     b.Property<int>("VendorDetailsId")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<int>("LocationId");
+                    b.Property<bool>("VaccineAvailability")
+                        .HasColumnType("bit");
 
-                    b.Property<bool>("VaccineAvailability");
+                    b.Property<int>("VaccineInfoId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("VaccineId");
+                    b.Property<int>("VendorLocationId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("VendorName");
+                    b.Property<string>("VendorName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("VendorDetailsId");
 
-                    b.HasIndex("LocationId");
+                    b.HasIndex("VaccineInfoId");
 
-                    b.HasIndex("VaccineId");
+                    b.HasIndex("VendorLocationId");
 
                     b.ToTable("VendorDetails");
                 });
 
             modelBuilder.Entity("Vax_Aid.Models.VendorLocation", b =>
                 {
-                    b.Property<int>("LocationId")
+                    b.Property<int>("VendorLocationId")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<string>("District");
+                    b.Property<float>("Distance")
+                        .HasColumnType("real");
 
-                    b.Property<string>("Municipality");
+                    b.Property<string>("District")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Provience");
+                    b.Property<string>("Municipality")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Tole");
+                    b.Property<string>("Provience")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("WardNo");
+                    b.Property<string>("Tole")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("LocationId");
+                    b.Property<int>("WardNo")
+                        .HasColumnType("int");
+
+                    b.HasKey("VendorLocationId");
 
                     b.ToTable("VendorLocation");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Vax_Aid.Models.BookingDetails", b =>
                 {
-                    b.HasOne("Vax_Aid.Models.VendorLocation", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Vax_Aid.Models.UserDetails", "UserDetails")
                         .WithMany()
                         .HasForeignKey("UserDetailsId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Vax_Aid.Models.VaccineInfo", "vaccineInfo")
                         .WithMany()
-                        .HasForeignKey("VaccineId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("VaccineInfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Vax_Aid.Models.VendorLocation", "Location")
+                        .WithMany()
+                        .HasForeignKey("VendorLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Location");
+
+                    b.Navigation("UserDetails");
+
+                    b.Navigation("vaccineInfo");
                 });
 
             modelBuilder.Entity("Vax_Aid.Models.UserDetails", b =>
@@ -431,7 +535,10 @@ namespace Vax_Aid.Migrations
                     b.HasOne("Vax_Aid.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("Vax_Aid.Models.Vaccination", b =>
@@ -439,25 +546,37 @@ namespace Vax_Aid.Migrations
                     b.HasOne("Vax_Aid.Models.UserDetails", "userDetails")
                         .WithMany()
                         .HasForeignKey("UserDetailsId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Vax_Aid.Models.VaccineInfo", "vaccineInfo")
                         .WithMany()
-                        .HasForeignKey("VaccineId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("VaccineInfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("userDetails");
+
+                    b.Navigation("vaccineInfo");
                 });
 
             modelBuilder.Entity("Vax_Aid.Models.VendorDetails", b =>
                 {
-                    b.HasOne("Vax_Aid.Models.VendorLocation", "VendorLocation")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Vax_Aid.Models.VaccineInfo", "vaccineInfo")
                         .WithMany()
-                        .HasForeignKey("VaccineId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("VaccineInfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Vax_Aid.Models.VendorLocation", "VendorLocation")
+                        .WithMany()
+                        .HasForeignKey("VendorLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("vaccineInfo");
+
+                    b.Navigation("VendorLocation");
                 });
 #pragma warning restore 612, 618
         }

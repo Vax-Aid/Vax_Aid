@@ -50,16 +50,16 @@ namespace Vax_Aid.Controllers
         // GET: BookingDetails/Create
         public IActionResult Create()
         {
-            ViewData["LocationId"] = new SelectList(_context.VendorLocation, "LocationId", "Municipality");
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality");
             ViewData["UserDetailsId"] = new SelectList(_context.UserDetails, "UserDetailsId", "UserName");
-            ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName");
+            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName");
             return View();
         }
 
         // POST: BookingDetails/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookingDetailsId,VaccineId,Dose,UserDetailsId,LocationId,Conformation")] BookingDetails bookingDetails)
+        public async Task<IActionResult> Create([Bind("BookingDetailsId,VaccineInfoId,Dose,UserDetailsId,VendorLocationId,Conformation")] BookingDetails bookingDetails)
         {
             if (ModelState.IsValid)
             {
@@ -67,9 +67,9 @@ namespace Vax_Aid.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationId"] = new SelectList(_context.VendorLocation, "LocationId", "Municipality", bookingDetails.LocationId);
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality", bookingDetails.VendorLocationId);
             ViewData["UserDetailsId"] = new SelectList(_context.UserDetails, "UserDetailsId", "UserName", bookingDetails.UserDetailsId);
-            ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName", bookingDetails.VaccineId);
+            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", bookingDetails.VaccineInfoId);
             return View(bookingDetails);
         }
 
@@ -86,16 +86,16 @@ namespace Vax_Aid.Controllers
             {
                 return NotFound();
             }
-            ViewData["LocationId"] = new SelectList(_context.VendorLocation, "LocationId", "Municipality", bookingDetails.LocationId);
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality", bookingDetails.VendorLocationId);
             ViewData["UserDetailsId"] = new SelectList(_context.UserDetails, "UserDetailsId", "UserName", bookingDetails.UserDetailsId);
-            ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName", bookingDetails.VaccineId);
+            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", bookingDetails.VaccineInfoId);
             return View(bookingDetails);
         }
 
         // POST: BookingDetails/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookingDetailsId,VaccineId,Dose,UserDetailsId,LocationId,Conformation")] BookingDetails bookingDetails)
+        public async Task<IActionResult> Edit(int id, [Bind("BookingDetailsId,VaccineInfoId,Dose,UserDetailsId,VendorLocationId,Conformation")] BookingDetails bookingDetails)
         {
             if (id != bookingDetails.BookingDetailsId)
             {
@@ -122,9 +122,9 @@ namespace Vax_Aid.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationId"] = new SelectList(_context.VendorLocation, "LocationId", "Municipality", bookingDetails.LocationId);
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality", bookingDetails.VendorLocationId);
             ViewData["UserDetailsId"] = new SelectList(_context.UserDetails, "UserDetailsId", "UserName", bookingDetails.UserDetailsId);
-            ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName", bookingDetails.VaccineId);
+            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", bookingDetails.VaccineInfoId);
             return View(bookingDetails);
         }
 

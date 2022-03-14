@@ -34,7 +34,7 @@ namespace Vax_Aid.Controllers
             }
 
             var vendorLocation = await _context.VendorLocation
-                .FirstOrDefaultAsync(m => m.LocationId == id);
+                .FirstOrDefaultAsync(m => m.VendorLocationId == id);
             if (vendorLocation == null)
             {
                 return NotFound();
@@ -52,7 +52,7 @@ namespace Vax_Aid.Controllers
         // POST: VendorLocations/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LocationId,Provience,District,Municipality,WardNo,Tole")] VendorLocation vendorLocation)
+        public async Task<IActionResult> Create([Bind("VendorLocationId,Provience,District,Municipality,WardNo,Tole,Distance")] VendorLocation vendorLocation)
         {
             if (ModelState.IsValid)
             {
@@ -82,9 +82,9 @@ namespace Vax_Aid.Controllers
         // POST: VendorLocations/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LocationId,Provience,District,Municipality,WardNo,Tole")] VendorLocation vendorLocation)
+        public async Task<IActionResult> Edit(int id, [Bind("VendorLocationId,Provience,District,Municipality,WardNo,Tole,Distance")] VendorLocation vendorLocation)
         {
-            if (id != vendorLocation.LocationId)
+            if (id != vendorLocation.VendorLocationId)
             {
                 return NotFound();
             }
@@ -98,7 +98,7 @@ namespace Vax_Aid.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VendorLocationExists(vendorLocation.LocationId))
+                    if (!VendorLocationExists(vendorLocation.VendorLocationId))
                     {
                         return NotFound();
                     }
@@ -121,7 +121,7 @@ namespace Vax_Aid.Controllers
             }
 
             var vendorLocation = await _context.VendorLocation
-                .FirstOrDefaultAsync(m => m.LocationId == id);
+                .FirstOrDefaultAsync(m => m.VendorLocationId == id);
             if (vendorLocation == null)
             {
                 return NotFound();
@@ -143,7 +143,7 @@ namespace Vax_Aid.Controllers
 
         private bool VendorLocationExists(int id)
         {
-            return _context.VendorLocation.Any(e => e.LocationId == id);
+            return _context.VendorLocation.Any(e => e.VendorLocationId == id);
         }
     }
 }

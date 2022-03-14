@@ -9,7 +9,7 @@ namespace Vax_Aid.Models
     public class VaccineInfo
     {
         [Key]
-        public int VaccineId { get; set; }
+        public int VaccineInfoId { get; set; }
         [Required]
         [StringLength(255)]
         public string vaccineName { get; set; }

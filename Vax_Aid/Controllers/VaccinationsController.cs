@@ -50,14 +50,14 @@ namespace Vax_Aid.Controllers
         public IActionResult Create()
         {
             ViewData["UserDetailsId"] = new SelectList(_context.UserDetails, "UserDetailsId", "UserName");
-            ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName");
+            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName");
             return View();
         }
 
         // POST: Vaccinations/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VaccinationId,VaccineId,SerialNumber,UserDetailsId")] Vaccination vaccination)
+        public async Task<IActionResult> Create([Bind("VaccinationId,VaccineInfoId,SerialNumber,UserDetailsId")] Vaccination vaccination)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace Vax_Aid.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["UserDetailsId"] = new SelectList(_context.UserDetails, "UserDetailsId", "UserName", vaccination.UserDetailsId);
-            ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName", vaccination.VaccineId);
+            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", vaccination.VaccineInfoId);
             return View(vaccination);
         }
 
@@ -84,14 +84,14 @@ namespace Vax_Aid.Controllers
                 return NotFound();
             }
             ViewData["UserDetailsId"] = new SelectList(_context.UserDetails, "UserDetailsId", "UserName", vaccination.UserDetailsId);
-            ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName", vaccination.VaccineId);
+            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", vaccination.VaccineInfoId);
             return View(vaccination);
         }
 
         // POST: Vaccinations/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VaccinationId,VaccineId,SerialNumber,UserDetailsId")] Vaccination vaccination)
+        public async Task<IActionResult> Edit(int id, [Bind("VaccinationId,VaccineInfoId,SerialNumber,UserDetailsId")] Vaccination vaccination)
         {
             if (id != vaccination.VaccinationId)
             {
@@ -119,7 +119,7 @@ namespace Vax_Aid.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["UserDetailsId"] = new SelectList(_context.UserDetails, "UserDetailsId", "UserName", vaccination.UserDetailsId);
-            ViewData["VaccineId"] = new SelectList(_context.VaccineInfos, "VaccineId", "vaccineName", vaccination.VaccineId);
+            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", vaccination.VaccineInfoId);
             return View(vaccination);
         }
 

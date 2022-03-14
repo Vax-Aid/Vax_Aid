@@ -15,5 +15,6 @@ namespace Vax_Aid.Models
         public string Municipality { get; set; }
         public int WardNo { get; set; }
         public string Tole { get; set; }
+        public float Distance { get; set; }
     }
 }

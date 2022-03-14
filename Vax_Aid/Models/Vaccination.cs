@@ -9,7 +9,7 @@ namespace Vax_Aid.Models
     {
         public int VaccinationId { get; set; }
         public VaccineInfo vaccineInfo { get; set; }
-        public int VaccineId { get; set; }
+        public int VaccineInfoId { get; set; }
         public string SerialNumber { get; set; }
         public UserDetails userDetails { get; set; }
         public int UserDetailsId { get; set; }

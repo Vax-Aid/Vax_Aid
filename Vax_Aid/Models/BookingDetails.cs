@@ -12,12 +12,12 @@ namespace Vax_Aid.Models
         [Key]
         public int BookingDetailsId { get; set; }
         public VaccineInfo vaccineInfo { get; set; }
-        public int VaccineId { get; set; }
+        public int VaccineInfoId { get; set; }
         public string Dose { get; set; }
         public UserDetails UserDetails { get; set; }
         public int UserDetailsId { get; set; }
         public VendorLocation Location { get; set; }
-        public int LocationId { get; set; }
+        public int VendorLocationId { get; set; }
         public bool Conformation { get; set; }
     }
 }

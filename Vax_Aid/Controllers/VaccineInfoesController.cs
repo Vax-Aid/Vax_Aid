@@ -34,7 +34,7 @@ namespace Vax_Aid.Controllers
             }
 
             var vaccineInfo = await _context.VaccineInfos
-                .FirstOrDefaultAsync(m => m.VaccineId == id);
+                .FirstOrDefaultAsync(m => m.VaccineInfoId == id);
             if (vaccineInfo == null)
             {
                 return NotFound();
@@ -52,7 +52,7 @@ namespace Vax_Aid.Controllers
         // POST: VaccineInfoes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VaccineId,vaccineName,CountryMade,DoseType,ManufacturedBy,ManufacturedDate,Delete")] VaccineInfo vaccineInfo)
+        public async Task<IActionResult> Create([Bind("VaccineInfoId,vaccineName,CountryMade,DoseType,ManufacturedBy,ManufacturedDate,Delete")] VaccineInfo vaccineInfo)
         {
             if (ModelState.IsValid)
             {
@@ -82,9 +82,9 @@ namespace Vax_Aid.Controllers
         // POST: VaccineInfoes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VaccineId,vaccineName,CountryMade,DoseType,ManufacturedBy,ManufacturedDate,Delete")] VaccineInfo vaccineInfo)
+        public async Task<IActionResult> Edit(int id, [Bind("VaccineInfoId,vaccineName,CountryMade,DoseType,ManufacturedBy,ManufacturedDate,Delete")] VaccineInfo vaccineInfo)
         {
-            if (id != vaccineInfo.VaccineId)
+            if (id != vaccineInfo.VaccineInfoId)
             {
                 return NotFound();
             }
@@ -98,7 +98,7 @@ namespace Vax_Aid.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VaccineInfoExists(vaccineInfo.VaccineId))
+                    if (!VaccineInfoExists(vaccineInfo.VaccineInfoId))
                     {
                         return NotFound();
                     }
@@ -121,7 +121,7 @@ namespace Vax_Aid.Controllers
             }
 
             var vaccineInfo = await _context.VaccineInfos
-                .FirstOrDefaultAsync(m => m.VaccineId == id);
+                .FirstOrDefaultAsync(m => m.VaccineInfoId == id);
             if (vaccineInfo == null)
             {
                 return NotFound();
@@ -143,7 +143,7 @@ namespace Vax_Aid.Controllers
 
         private bool VaccineInfoExists(int id)
         {
-            return _context.VaccineInfos.Any(e => e.VaccineId == id);
+            return _context.VaccineInfos.Any(e => e.VaccineInfoId == id);
         }
     }
 }
