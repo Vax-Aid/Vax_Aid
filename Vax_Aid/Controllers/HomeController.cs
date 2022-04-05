@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Vax_Aid.Data;
 using Vax_Aid.Models;
 using Vax_Aid.Service;
@@ -31,8 +32,10 @@ namespace Vax_Aid.Controllers
         {
 
             var address =_context.Addresses.Where(x => x.AddressId == user.AddressId).FirstOrDefault();
-            var address1 = _context.Addresses.OrderByDescending(x => x.GetDistance(address.Longitude,address.Latitude)).ToList();
-            var vendor = _context.VendorDetails.Where(x => x.VaccineInfoId == user.VaccineInfoId).ToList();
+            var address1 = _context.Addresses.OrderByDescending(x => x.GetDistance(address.Longitude, address.Latitude))
+                .Take(5);
+            var vendor = _context.VendorDetails.Where(x => x.VaccineInfoId == user.VaccineInfoId);
+            Console.WriteLine(vendor.ToQueryString());
             var allVendors = _context.VendorLocation.ToList();
             ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName");
             List<Locationinf> locationinfo = new List<Locationinf>();
