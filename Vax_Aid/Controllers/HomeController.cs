@@ -29,15 +29,17 @@ namespace Vax_Aid.Controllers
         [HttpPost]
         public IActionResult SearchNearestLocation(UserViewModel user)
         {
+
             var address =_context.Addresses.Where(x => x.AddressId == user.AddressId).FirstOrDefault();
+            var address1 = _context.Addresses.OrderByDescending(x => x.GetDistance(address.Longitude,address.Latitude)).ToList();
             var vendor = _context.VendorDetails.Where(x => x.VaccineInfoId == user.VaccineInfoId).ToList();
             var allVendors = _context.VendorLocation.ToList();
             ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName");
             List<Locationinf> locationinfo = new List<Locationinf>();
             foreach (var item in allVendors)
             {
-                NearestNeighbour nearestNeighbour = new NearestNeighbour();
-                var pointer = nearestNeighbour.getDistanceFromLatLonInKm(address.Latitude, address.Longitude, item.Latitude, item.Longitude);
+               
+                var pointer = NearestNeighbour.getDistanceFromLatLonInKm(address.Latitude, address.Longitude, item.Latitude, item.Longitude);
                 locationinfo.Add(new Locationinf
                 {
                     VendorLocationId = item.VendorLocationId,

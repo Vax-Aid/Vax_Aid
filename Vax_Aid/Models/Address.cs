@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Vax_Aid.Service;
 
 namespace Vax_Aid.Models
 {
@@ -13,5 +14,12 @@ namespace Vax_Aid.Models
         public string AddressName { get; set; }
         public float Latitude { get; set; }
         public float Longitude { get; set; }
+
+        public double GetDistance(double latitude, double longitude)
+        {
+          return  NearestNeighbour.getDistanceFromLatLonInKm(latitude, longitude, this.Latitude, this.Longitude);
+        }
+        
+        
     }
 }
