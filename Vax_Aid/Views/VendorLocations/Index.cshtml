@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
-   
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
@@ -11,72 +11,55 @@
     <a asp-action="Create">Create New</a>
 </p>
 <link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-@*<div style="overflow: auto;">*@
-    <table id="vendorLocationDatatable" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%;">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Provience)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.District)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Municipality)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.WardNo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tole)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Distance)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+<table id="VendorLocationsDatatable" class="table table-striped table-bordered dt-responsive nowrap">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitude)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Provience)
+                    @Html.DisplayFor(modelItem => item.LocationName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.District)
+                    @Html.DisplayFor(modelItem => item.Latitude)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Municipality)
+                    @Html.DisplayFor(modelItem => item.Longitude)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WardNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tole)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Distance)
-                </td>
+                
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.VendorLocationId">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.VendorLocationId">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.VendorLocationId">Delete</a>
                 </td>
             </tr>
-            }
-        </tbody>
-    </table>
-@*</div>*@
-
+        }
+    </tbody>
+</table>
 @section Scripts
 {
     <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#vendorLocationDatatable').dataTable({
+            $('#VendorLocationsDatatable').dataTable({
             });
         });
     </script>
+
 }
+

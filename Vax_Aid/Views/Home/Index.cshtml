@@ -1,4 +1,4 @@
-﻿@model Vax_Aid.Models.BookingDetails
+﻿@model Vax_Aid.Models.UserViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -39,12 +39,12 @@
             </div>
 
             <div class="form-div">
-                <form>
+                <form asp-action="SearchNearestLocation" asp-controller="home">
                     <label class="select-vaccination" for="Vaccinationinfo">Choose your Vaccination</label>
                     <select asp-for="VaccineInfoId" class="select-vaccination" asp-items="ViewBag.VaccineInfoId"></select>
                     <label class="select-location" for="Vaccinationinfo">Select location</label>
-                    <select asp-for="VendorLocationId" class="select-location" asp-items="ViewBag.VendorLocationId"></select>
-                    <button type="button" class="search-button" name="Search">Search</button>
+                    <select asp-for="AddressId" class="select-location" asp-items="ViewBag.AddressId"></select>
+                    <button type="submit" class="search-button" name="Search">Search</button>
                 </form>
             </div>
 

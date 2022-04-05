@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Delete";
-    
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Delete</h2>
@@ -13,41 +13,24 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Provience)
+            @Html.DisplayNameFor(model => model.AddressName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Provience)
+            @Html.DisplayFor(model => model.AddressName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.District)
+            @Html.DisplayNameFor(model => model.Latitude)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.District)
+            @Html.DisplayFor(model => model.Latitude)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Municipality)
+            @Html.DisplayNameFor(model => model.Longitude)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Municipality)
+            @Html.DisplayFor(model => model.Longitude)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.WardNo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.WardNo)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Tole)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Tole)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Distance)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Distance)
-        </dd>
+        
     </dl>
     
     <form asp-action="Delete">

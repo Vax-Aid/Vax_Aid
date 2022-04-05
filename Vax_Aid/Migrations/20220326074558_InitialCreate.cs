@@ -13,11 +13,9 @@ namespace Vax_Aid.Migrations
                 {
                     AddressId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Provience = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    District = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WardNo = table.Column<int>(type: "int", nullable: false),
-                    Tole = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Latitude = table.Column<float>(type: "real", nullable: false),
+                    Longitude = table.Column<float>(type: "real", nullable: false),
                     Distance = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
@@ -88,11 +86,9 @@ namespace Vax_Aid.Migrations
                 {
                     VendorLocationId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Provience = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    District = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WardNo = table.Column<int>(type: "int", nullable: false),
-                    Tole = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LocationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Latitude = table.Column<float>(type: "real", nullable: false),
+                    Longitude = table.Column<float>(type: "real", nullable: false),
                     Distance = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>

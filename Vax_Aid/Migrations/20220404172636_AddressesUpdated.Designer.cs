@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vax_Aid.Data;
 
 namespace Vax_Aid.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220404172636_AddressesUpdated")]
+    partial class AddressesUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,9 +249,6 @@ namespace Vax_Aid.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Conformation")
                         .HasColumnType("bit");
 
@@ -266,8 +265,6 @@ namespace Vax_Aid.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("BookingDetailsId");
-
-                    b.HasIndex("AddressId");
 
                     b.HasIndex("UserDetailsId");
 
@@ -492,12 +489,6 @@ namespace Vax_Aid.Migrations
 
             modelBuilder.Entity("Vax_Aid.Models.BookingDetails", b =>
                 {
-                    b.HasOne("Vax_Aid.Models.Address", "address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Vax_Aid.Models.UserDetails", "UserDetails")
                         .WithMany()
                         .HasForeignKey("UserDetailsId")
@@ -515,8 +506,6 @@ namespace Vax_Aid.Migrations
                         .HasForeignKey("VendorLocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("address");
 
                     b.Navigation("Location");
 

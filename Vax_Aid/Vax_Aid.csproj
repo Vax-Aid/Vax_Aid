@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Accord" Version="3.8.0" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="KDSharp.KDTree" Version="0.9.28" />
     <!--<PackageReference Include="Microsoft.AspNetCore" Version="2.1.7" />-->
@@ -41,7 +42,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>

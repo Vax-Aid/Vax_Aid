@@ -10,7 +10,7 @@ using Vax_Aid.Data;
 namespace Vax_Aid.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220314175818_InitialCreate")]
+    [Migration("20220326074558_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -228,23 +228,17 @@ namespace Vax_Aid.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("AddressName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float>("Distance")
                         .HasColumnType("real");
 
-                    b.Property<string>("District")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("Latitude")
+                        .HasColumnType("real");
 
-                    b.Property<string>("Municipality")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Provience")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Tole")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("WardNo")
-                        .HasColumnType("int");
+                    b.Property<float>("Longitude")
+                        .HasColumnType("real");
 
                     b.HasKey("AddressId");
 
@@ -434,20 +428,14 @@ namespace Vax_Aid.Migrations
                     b.Property<float>("Distance")
                         .HasColumnType("real");
 
-                    b.Property<string>("District")
+                    b.Property<float>("Latitude")
+                        .HasColumnType("real");
+
+                    b.Property<string>("LocationName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Municipality")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Provience")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Tole")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("WardNo")
-                        .HasColumnType("int");
+                    b.Property<float>("Longitude")
+                        .HasColumnType("real");
 
                     b.HasKey("VendorLocationId");
 

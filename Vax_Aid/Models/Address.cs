@@ -10,11 +10,8 @@ namespace Vax_Aid.Models
     {
         [Key]
         public int AddressId { get; set; }
-        public string Provience { get; set; }
-        public string District { get; set; }
-        public string Municipality { get; set; }
-        public int WardNo { get; set; }
-        public string Tole { get; set; }
-        public float Distance { get; set; }
+        public string AddressName { get; set; }
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
     }
 }
