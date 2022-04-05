@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Vax_Aid.Data;
 using Vax_Aid.Models;
+using Vax_Aid.Service;
 
 namespace Vax_Aid.Controllers
 {
@@ -21,9 +22,39 @@ namespace Vax_Aid.Controllers
         public IActionResult Index()
         {
             ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName");
-            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality");
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressName");
 
             return View();
+        }
+        [HttpPost]
+        public IActionResult SearchNearestLocation(UserViewModel user)
+        {
+            var address =_context.Addresses.Where(x => x.AddressId == user.AddressId).FirstOrDefault();
+            var vendor = _context.VendorDetails.Where(x => x.VaccineInfoId == user.VaccineInfoId).ToList();
+            var allVendors = _context.VendorLocation.ToList();
+            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName");
+            List<Locationinf> locationinfo = new List<Locationinf>();
+            foreach (var item in allVendors)
+            {
+                NearestNeighbour nearestNeighbour = new NearestNeighbour();
+                var pointer = nearestNeighbour.getDistanceFromLatLonInKm(address.Latitude, address.Longitude, item.Latitude, item.Longitude);
+                locationinfo.Add(new Locationinf
+                {
+                    VendorLocationId = item.VendorLocationId,
+                    address = item.LocationName,
+                    pointer = pointer 
+                });
+                //get nearest location (address lat, address lon, item.lat, item.long)
+                //pointer, 
+            }
+
+            locationinfo = locationinfo.OrderBy(x => x.pointer).Take(5).ToList();
+
+            //locationinfo.Sort(x => x.pointer);
+
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressName");
+
+            return View(locationinfo);
         }
 
         public IActionResult About()
@@ -50,5 +81,12 @@ namespace Vax_Aid.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+    }
+
+    public class Locationinf
+    {
+        public double pointer { get; set; }
+        public string address { get; set; }
+        public int VendorLocationId { get; set; }
     }
 }

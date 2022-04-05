@@ -1,17 +1,118 @@
 ﻿@{
     ViewData["Title"] = "Contact";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+@{
+    ViewData["Title"] = "Contact";
+}
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+@model Vax_Aid.Models.UserDetails
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+
+<body>
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/register/css/jquery-ui.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+
+    <div class="header-div">
+        <img src="~/images/logo.png" class="header-logo" />
+        <p class="header-para">
+            Book your Vaccination online
+        </p>
+    </div>
+
+
+    <div class="body-div">
+        <div class="vax-form">
+            <form action="#" method="post">
+                <div class="w3l-user">
+                    <label class="head">UserName<span class="w3l-star"> * </span></label>
+                    <input type="text" name="" UserName" placeholder="" required="">
+                </div>
+                <div class="w3l-mail">
+                    <label class="head">Email<span class="w3l-star"> * </span></label>
+                    <input type="email" name="Email" placeholder="" required="">
+                </div>
+                <div class="clear"></div>
+                <div class="w3l-details1">
+                    <div class="w3l-num">
+                        <label class="head">Phone<span class="w3l-star"> * </span></label>
+                        <input type="text" name="phone number" placeholder="" required="">
+                    </div>
+                    <div class="w3l-date">
+                        <label class="head">DateOfBirth<span class="w3l-star"> * </span></label>
+                        <div class="styled-input">
+                            <input class="date" id="datepicker" name="Text" type="text" value="MM/DD/YYYY" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'MM/DD/YYYY';}" required="">
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="gender">
+                        <label class="head">Gender<span class="w3l-star"> * </span></label>
+                        <select class="form-control" required="">
+                            <option>Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                    <div class="w3l-options2">
+                        <label class="head">Identity Type<span class="w3l-star"> * </span></label>
+                        <select class="category2" required="">
+                        </select>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="w3l-user">
+                    <label class="head">AddressId<span class="w3l-star"> * </span></label>
+                    <input type="text" name="Address" placeholder="" required="">
+                </div>
+                <div class="w3l-num">
+                    <label class="head">Occupation<span class="w3l-star"> * </span></label>
+                    <input type="text" name="City" placeholder="" required="">
+                </div>
+                <div class="w3l-sym">
+                    <label class="head">MedicalCondition</label>
+                    <input type="text" name="State" placeholder="" required="">
+                </div>
+                <div class="clear"></div>
+                <div class="w3l-num">
+                    <label class="head">Nationality<span class="w3l-star"> * </span></label>
+                    <input type="text" name="Nationality" placeholder="" required="">
+                </div>
+                <div class="w3l-options2">
+                    <label class="head">Country<span class="w3l-star"> * </span></label>
+                    <select class="category2" required="">
+                        <option value=""></option>
+                        <option value="">Country-1</option>
+                        <option value="">Country-2</option>
+                        <option value="">Country-3</option>
+                        <option value="">Country-4</option>
+
+                    </select>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Disability" /> @Html.DisplayNameFor(model => model.Disability)
+                    </label>
+                </div>
+                <div class="btn">
+                    <input type="submit" name="submit" value="Submit" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer-div">
+        <p style="text-align:center">
+            <h2>For Support:</h2>
+            Email. vaxaidofficial@gmail.com<br />
+            Ph no. +977-9806094974
+        </p>
+    </div>
+
+    <script src="~/register/js/jquery-2.1.4.min.js"></script>
+    <script src="~/register/js/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker,#datepicker1").datepicker();
+        });
+    </script>
+</body>

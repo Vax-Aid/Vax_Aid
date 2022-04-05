@@ -52,7 +52,7 @@ namespace Vax_Aid.Controllers
         // POST: VendorLocations/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VendorLocationId,Provience,District,Municipality,WardNo,Tole,Distance")] VendorLocation vendorLocation)
+        public async Task<IActionResult> Create([Bind("VendorLocationId,LocationName,Latitude,Longitude")] VendorLocation vendorLocation)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace Vax_Aid.Controllers
         // POST: VendorLocations/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VendorLocationId,Provience,District,Municipality,WardNo,Tole,Distance")] VendorLocation vendorLocation)
+        public async Task<IActionResult> Edit(int id, [Bind("VendorLocationId,LocationName,Latitude,Longitude")] VendorLocation vendorLocation)
         {
             if (id != vendorLocation.VendorLocationId)
             {

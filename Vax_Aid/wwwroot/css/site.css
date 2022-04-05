@@ -64,12 +64,12 @@ body {
     background: #c8d6fa;
     margin-top: 20px;
     display: block;
-    height: 800px;
+    height: auto;
     width: 900px;
     border-radius: 5px;
     position: relative;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, 0%);
 }
 .top-div p{
     color:black;
@@ -84,6 +84,17 @@ body {
     color: #f69494;
     padding-top:20px;
 }
+
+.top-div img {
+        margin-right: 20px;
+        float: left;
+        margin-bottom: 40px;
+        height: 300px;
+        width: 300px;
+        display: block;
+        float: left;
+    }
+
 .form-div{
     margin-top:140px;
 }
@@ -104,16 +115,6 @@ body {
     margin-right:100px;
 }
 
-    .top-div img {
-        margin-right: 20px;
-        float: left;
-        margin-bottom: 40px;
-        height: 300px;
-        width: 300px;
-        display: block;
-        float: left;
-    }
-
 input[type=text], select {
     width: 80%;
     padding: 15px 20px;
@@ -124,7 +125,7 @@ input[type=text], select {
     box-sizing: border-box;
 }
 button[type=button], select {
-    margin-top:20px;
+    margin-top: 20px;
     width: 80%;
     padding: 15px 20px;
     margin-left: 20px;
@@ -132,7 +133,8 @@ button[type=button], select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    color:black;
+    color: black;
+    margin-bottom:20px;
 }
 
 .footer-div {
@@ -151,10 +153,13 @@ button[type=button], select {
 }
 
 
+
+
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 732px) {
     /* Hide captions */
-    .carousel-caption {
+    .carousel-caption{
         display: none;
     }
 }
