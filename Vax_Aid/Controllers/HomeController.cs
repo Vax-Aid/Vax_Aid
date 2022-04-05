@@ -15,10 +15,12 @@ namespace Vax_Aid.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IAddressService _addressService;
 
-        public HomeController(ApplicationDbContext context)
+        public HomeController(ApplicationDbContext context,IAddressService addressService)
         {
             _context = context;
+            _addressService = addressService;
         }
         public IActionResult Index()
         {
@@ -28,38 +30,13 @@ namespace Vax_Aid.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult SearchNearestLocation(UserViewModel user)
+        public async Task<IActionResult> SearchNearestLocation(UserViewModel user)
         {
 
-            var address =_context.Addresses.Where(x => x.AddressId == user.AddressId).FirstOrDefault();
-            var address1 = _context.Addresses.OrderByDescending(x => x.GetDistance(address.Longitude, address.Latitude))
-                .Take(5);
-            var vendor = _context.VendorDetails.Where(x => x.VaccineInfoId == user.VaccineInfoId);
-            Console.WriteLine(vendor.ToQueryString());
-            var allVendors = _context.VendorLocation.ToList();
-            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName");
-            List<Locationinf> locationinfo = new List<Locationinf>();
-            foreach (var item in allVendors)
-            {
-               
-                var pointer = NearestNeighbour.getDistanceFromLatLonInKm(address.Latitude, address.Longitude, item.Latitude, item.Longitude);
-                locationinfo.Add(new Locationinf
-                {
-                    VendorLocationId = item.VendorLocationId,
-                    address = item.LocationName,
-                    pointer = pointer 
-                });
-                //get nearest location (address lat, address lon, item.lat, item.long)
-                //pointer, 
-            }
-
-            locationinfo = locationinfo.OrderBy(x => x.pointer).Take(5).ToList();
-
-            //locationinfo.Sort(x => x.pointer);
-
+            var address = await _context.Addresses.Where(x => x.AddressId == user.AddressId).SingleOrDefaultAsync();
+            var nearestAddresses = await _addressService.GetNearestLocationsAsync(address.Longitude, address.Latitude, 5);
             ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressName");
-
-            return View(locationinfo);
+            return View(nearestAddresses);
         }
 
         public IActionResult About()

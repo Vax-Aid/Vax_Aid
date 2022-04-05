@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Vax_Aid.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Vax_Aid.Service;
 
 namespace Vax_Aid
 {
@@ -39,6 +40,7 @@ namespace Vax_Aid
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddTransient<IAddressService, AddressService>();
 
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc(options => options.EnableEndpointRouting = false);
