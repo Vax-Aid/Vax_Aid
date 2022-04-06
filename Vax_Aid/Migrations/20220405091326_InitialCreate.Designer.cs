@@ -10,7 +10,7 @@ using Vax_Aid.Data;
 namespace Vax_Aid.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220326074558_InitialCreate")]
+    [Migration("20220405091326_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -231,9 +231,6 @@ namespace Vax_Aid.Migrations
                     b.Property<string>("AddressName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Distance")
-                        .HasColumnType("real");
-
                     b.Property<float>("Latitude")
                         .HasColumnType("real");
 
@@ -424,9 +421,6 @@ namespace Vax_Aid.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
-
-                    b.Property<float>("Distance")
-                        .HasColumnType("real");
 
                     b.Property<float>("Latitude")
                         .HasColumnType("real");

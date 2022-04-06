@@ -15,8 +15,7 @@ namespace Vax_Aid.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AddressName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Latitude = table.Column<float>(type: "real", nullable: false),
-                    Longitude = table.Column<float>(type: "real", nullable: false),
-                    Distance = table.Column<float>(type: "real", nullable: false)
+                    Longitude = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,8 +87,7 @@ namespace Vax_Aid.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LocationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Latitude = table.Column<float>(type: "real", nullable: false),
-                    Longitude = table.Column<float>(type: "real", nullable: false),
-                    Distance = table.Column<float>(type: "real", nullable: false)
+                    Longitude = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {

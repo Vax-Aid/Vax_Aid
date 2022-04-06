@@ -1,0 +1,47 @@
+﻿
+.body-div {
+    margin-top:85px;
+}
+
+.vax-form {
+    box-shadow: 0 1px 6px rgb(0 0 0 / 50%), 0 1px 4px rgb(0 0 0 / 50%);
+    background: #c8d6fa;
+    display: block;
+    height: auto;
+    width: 900px;
+    border-radius: 5px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.search-button {
+    margin-top: 20px;
+    width: 30%;
+    padding: 10px 15px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: black;
+    margin-left: 20px;
+}
+
+button:hover {
+    background-color: #f69494;
+}
+
+.item-result h3{
+    color: #f69494;
+    font-display: block;
+    font-family: sans-serif,Poppins;
+    font-size: 20px;
+    text-align: justify;
+}
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 732px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}

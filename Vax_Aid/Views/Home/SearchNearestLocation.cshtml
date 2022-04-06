@@ -1,10 +1,22 @@
 ﻿@model List<Vax_Aid.Controllers.Locationinf>
 
-@foreach (var item in Model)
-{
-    <div>
-        Name : @item.address <br/>
-        Book Now
+<link href="~/css/StyleSheet.css" rel="stylesheet" />
+<body>
+    <div class="body-div">
+        <div class="vax-form">
+            <div class="form-div">
+                <h1 style="margin-left:20px;">Nearest Vaccination Centres</h1><br/>
+                @foreach (var item in Model)
+                {
+                <div class="item-result">
+                    <ol><h3>@item.address <br /></h3></ol>
+                    <button type="submit" class="search-button" name="Search">MoreInfo</button>
+                </div>
+                    <br />
+                }
+            </div>
+        </div>
     </div>
-    <br />
-}
+</body>
+
+
