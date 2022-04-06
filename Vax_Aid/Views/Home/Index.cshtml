@@ -43,7 +43,9 @@
                     <label class="select-vaccination" for="Vaccinationinfo">Choose your Vaccination</label>
                     <select asp-for="VaccineInfoId" class="select-vaccination" asp-items="ViewBag.VaccineInfoId"></select>
                     <label class="select-location" for="Vaccinationinfo">Select location</label>
-                    <select asp-for="AddressId" class="select-location" asp-items="ViewBag.AddressId"></select>
+                    <select required asp-for="AddressId" class="select-location" asp-items="ViewBag.AddressId">
+                        <option>Select your location</option>
+                    </select>
                     <button type="submit" class="search-button" name="Search">Search</button>
                 </form>
             </div>

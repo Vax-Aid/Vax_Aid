@@ -1,9 +1,13 @@
 ﻿@model List<Vax_Aid.Controllers.Locationinf>
+@{
+    ViewData["Title"] = "Nearest Centers";
+
+}
 
 @foreach (var item in Model)
 {
     <div>
-        Name : @item.address <br/>
+        Name : @item.address <br />
         Book Now
     </div>
     <br />
