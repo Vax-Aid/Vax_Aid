@@ -1,14 +1,14 @@
 ﻿@model Vax_Aid.Models.UserDetails
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Conformation";
    
 }
 
-<h2>Details</h2>
+<h2>Booking Successful...</h2>
 
 <div>
-    <h4>UserDetails</h4>
+    <h4>Your Details</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -84,6 +84,12 @@
             @Html.DisplayFor(model => model.MedicalConditions)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.DoseType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DoseType)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Disability)
         </dt>
         <dd>
@@ -92,6 +98,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.UserDetailsId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.UserDetailsId">Edit</a> 
+
 </div>

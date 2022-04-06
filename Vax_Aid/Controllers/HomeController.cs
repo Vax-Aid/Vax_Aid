@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -56,7 +57,7 @@ namespace Vax_Aid.Controllers
 
             return View(locationinfo);
         }
-
+       
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

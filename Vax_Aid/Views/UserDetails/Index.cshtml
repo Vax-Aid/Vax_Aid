@@ -52,6 +52,9 @@
                     @Html.DisplayNameFor(model => model.MedicalConditions)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.DoseType)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Disability)
                 </th>
                 <th></th>
@@ -60,52 +63,55 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ethnicity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gender)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateofBirth)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address.AddressName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Phone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nationality)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdentityType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdentityNo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Occupation)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MedicalConditions)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Disability)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.UserDetailsId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.UserDetailsId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.UserDetailsId">Delete</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ethnicity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateofBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address.AddressName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nationality)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdentityType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdentityNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Occupation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedicalConditions)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoseType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Disability)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.UserDetailsId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.UserDetailsId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.UserDetailsId">Delete</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

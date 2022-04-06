@@ -20,13 +20,13 @@
     @RenderSection("Styles", required: false)
 </head>
 <body>
-
-    <partial name="_Header" />
+        <partial name="_Header" />
     @if (User.Identity.IsAuthenticated)
     {
 
         <partial name="_Sidebar" />
     }
+
 
     <partial name="_CookieConsentPartial" />
 
@@ -34,7 +34,9 @@
         @RenderBody()
         <hr />
     </div>
-    <partial name="_Footer" />
+
+        <partial name="_Footer" />
+    
 
     <script src="~/theme/js/jquery.js"></script>
     <script src="~/theme/js/bootstrap.min.js"></script>

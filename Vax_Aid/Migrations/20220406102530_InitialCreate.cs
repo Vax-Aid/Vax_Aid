@@ -112,6 +112,7 @@ namespace Vax_Aid.Migrations
                     IdentityNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Occupation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MedicalConditions = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DoseType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Disability = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

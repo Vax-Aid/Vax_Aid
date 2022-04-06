@@ -75,6 +75,11 @@
                 <span asp-validation-for="MedicalConditions" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="DoseType" class="control-label"></label>
+                <input asp-for="DoseType" class="form-control" />
+                <span asp-validation-for="DoseType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <div class="checkbox">
                     <label>
                         <input asp-for="Disability" /> @Html.DisplayNameFor(model => model.Disability)

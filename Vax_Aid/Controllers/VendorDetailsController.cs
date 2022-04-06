@@ -49,7 +49,7 @@ namespace Vax_Aid.Controllers
         // GET: VendorDetails/Create
         public IActionResult Create()
         {
-            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality");
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "LocationName");
             ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName");
             return View();
         }
@@ -65,7 +65,7 @@ namespace Vax_Aid.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality", vendorDetails.VendorLocationId);
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "LocationName", vendorDetails.VendorLocationId);
             ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", vendorDetails.VaccineInfoId);
             return View(vendorDetails);
         }
@@ -83,7 +83,7 @@ namespace Vax_Aid.Controllers
             {
                 return NotFound();
             }
-            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality", vendorDetails.VendorLocationId);
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "LocationName", vendorDetails.VendorLocationId);
             ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", vendorDetails.VaccineInfoId);
             return View(vendorDetails);
         }
@@ -118,7 +118,7 @@ namespace Vax_Aid.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality", vendorDetails.VendorLocationId);
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "LocationName", vendorDetails.VendorLocationId);
             ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", vendorDetails.VaccineInfoId);
             return View(vendorDetails);
         }

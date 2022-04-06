@@ -11,7 +11,7 @@ namespace Vax_Aid.Models
         [Key]
         public int AddressId { get; set; }
         public string AddressName { get; set; }
-        public float Latitude { get; set; }
-        public float Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 }

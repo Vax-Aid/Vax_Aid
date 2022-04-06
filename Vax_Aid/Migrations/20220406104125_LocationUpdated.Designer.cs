@@ -10,8 +10,8 @@ using Vax_Aid.Data;
 namespace Vax_Aid.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220405091326_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220406104125_LocationUpdated")]
+    partial class LocationUpdated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -231,11 +231,11 @@ namespace Vax_Aid.Migrations
                     b.Property<string>("AddressName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Latitude")
-                        .HasColumnType("real");
+                    b.Property<double>("Latitude")
+                        .HasColumnType("float");
 
-                    b.Property<float>("Longitude")
-                        .HasColumnType("real");
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
 
                     b.HasKey("AddressId");
 
@@ -290,6 +290,9 @@ namespace Vax_Aid.Migrations
 
                     b.Property<bool>("Disability")
                         .HasColumnType("bit");
+
+                    b.Property<string>("DoseType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -422,14 +425,14 @@ namespace Vax_Aid.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<float>("Latitude")
-                        .HasColumnType("real");
+                    b.Property<double>("Latitude")
+                        .HasColumnType("float");
 
                     b.Property<string>("LocationName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Longitude")
-                        .HasColumnType("real");
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
 
                     b.HasKey("VendorLocationId");
 

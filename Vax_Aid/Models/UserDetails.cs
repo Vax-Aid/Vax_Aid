@@ -25,6 +25,7 @@ namespace Vax_Aid.Models
         public string IdentityNo { get; set; }
         public string Occupation { get; set; }
         public string MedicalConditions { get; set; }
+        public string DoseType { get; set; }
         public bool Disability { get; set; }
     }
 }

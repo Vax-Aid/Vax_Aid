@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vax_Aid.Data;
 
 namespace Vax_Aid.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220406102530_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -229,11 +231,11 @@ namespace Vax_Aid.Migrations
                     b.Property<string>("AddressName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
+                    b.Property<float>("Latitude")
+                        .HasColumnType("real");
 
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
+                    b.Property<float>("Longitude")
+                        .HasColumnType("real");
 
                     b.HasKey("AddressId");
 
@@ -423,14 +425,14 @@ namespace Vax_Aid.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
+                    b.Property<float>("Latitude")
+                        .HasColumnType("real");
 
                     b.Property<string>("LocationName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
+                    b.Property<float>("Longitude")
+                        .HasColumnType("real");
 
                     b.HasKey("VendorLocationId");
 

@@ -50,7 +50,7 @@ namespace Vax_Aid.Controllers
         // GET: BookingDetails/Create
         public IActionResult Create()
         {
-            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality");
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "LocationName");
             ViewData["UserDetailsId"] = new SelectList(_context.UserDetails, "UserDetailsId", "UserName");
             ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName");
             return View();
@@ -67,7 +67,7 @@ namespace Vax_Aid.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality", bookingDetails.VendorLocationId);
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "LocationName", bookingDetails.VendorLocationId);
             ViewData["UserDetailsId"] = new SelectList(_context.UserDetails, "UserDetailsId", "UserName", bookingDetails.UserDetailsId);
             ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", bookingDetails.VaccineInfoId);
             return View(bookingDetails);
@@ -86,7 +86,7 @@ namespace Vax_Aid.Controllers
             {
                 return NotFound();
             }
-            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality", bookingDetails.VendorLocationId);
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "LocationName", bookingDetails.VendorLocationId);
             ViewData["UserDetailsId"] = new SelectList(_context.UserDetails, "UserDetailsId", "UserName", bookingDetails.UserDetailsId);
             ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", bookingDetails.VaccineInfoId);
             return View(bookingDetails);
@@ -122,7 +122,7 @@ namespace Vax_Aid.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "Municipality", bookingDetails.VendorLocationId);
+            ViewData["VendorLocationId"] = new SelectList(_context.VendorLocation, "VendorLocationId", "LocationName", bookingDetails.VendorLocationId);
             ViewData["UserDetailsId"] = new SelectList(_context.UserDetails, "UserDetailsId", "UserName", bookingDetails.UserDetailsId);
             ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName", bookingDetails.VaccineInfoId);
             return View(bookingDetails);

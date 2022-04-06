@@ -11,7 +11,7 @@ namespace Vax_Aid.Models
         [Key]
         public int VendorLocationId { get; set; }
         public string LocationName { get; set; }
-        public float Latitude { get; set; }
-        public float Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 }

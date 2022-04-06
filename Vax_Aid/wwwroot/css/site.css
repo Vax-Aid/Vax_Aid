@@ -1,54 +1,4 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
-for details on configuring this project to bundle and minify static web assets. */
-body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
-
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
-
-/* QR code generator */
-#qrCode {
-    margin: 15px;
-}
-
-.header-div {
-    margin-top: 100px;
-    display: block;
-    background: #f69494;
-    box-shadow: 0 1px 6px rgb(0 0 0 / 50%), 0 1px 4px rgb(0 0 0 / 50%);
-    position:relative;
-    z-index: 1;
-    color: #313131;
-    border-bottom: 5px solid #28808c;
-    border-radius: 5px;
-    height: 5%;
-    width: auto;
-    text-align:center;
-}
-
-.header-logo {
-    height:150px;
-    width:150px;
-    display: block;
-}
-
+﻿
 .header-div .header-para {
     font-family: sans-serif,Poppins;
     font-size: 40px;
@@ -59,10 +9,13 @@ body {
     transform: translate(-50%, -50%);
 }
 
+.body-div {
+    margin-top: 70px;
+    padding-right:100px;
+}
 .vax-form {
     box-shadow: 0 1px 6px rgb(0 0 0 / 50%), 0 1px 4px rgb(0 0 0 / 50%);
     background: #c8d6fa;
-    margin-top: 20px;
     display: block;
     height: auto;
     width: 900px;
@@ -103,14 +56,14 @@ body {
     padding-right: 80px;
     margin-left: 20px;
     font-family: sans-serif,poppins;
-    font-size: 30px;
+    font-size: 20px;
     color: #f69494;
 }
 .select-location {
     margin-left:20px;
     margin-top: 20px;
     font-family: sans-serif,poppins;
-    font-size: 30px;
+    font-size: 20px;
     color: #f69494;
     margin-right:100px;
 }
@@ -124,9 +77,9 @@ input[type=text], select {
     border-radius: 4px;
     box-sizing: border-box;
 }
-button[type=button], select {
+.search-button{
     margin-top: 20px;
-    width: 80%;
+    width: 20%;
     padding: 15px 20px;
     margin-left: 20px;
     display: inline-block;
@@ -135,6 +88,9 @@ button[type=button], select {
     box-sizing: border-box;
     color: black;
     margin-bottom:20px;
+}
+button:hover {
+    background-color: #f69494;
 }
 
 .footer-div {
@@ -152,10 +108,9 @@ button[type=button], select {
     text-align: center;
 }
 
-
-
-
-
+.item-result {
+    color: #f69494;
+}
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 732px) {
     /* Hide captions */
