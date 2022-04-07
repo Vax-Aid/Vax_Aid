@@ -36,11 +36,15 @@
             <div class="form-div">
                 <form asp-action="SearchNearestLocation" asp-controller="home">
                     <label class="select-vaccination" for="Vaccinationinfo">Choose your Vaccination</label>
-                    <select asp-for="VaccineInfoId" class="select-vaccination" asp-items="ViewBag.VaccineInfoId"></select>
-                    <label class="select-location" for="Vaccinationinfo">Select location</label>
-                    <select required asp-for="AddressId" class="select-location" asp-items="ViewBag.AddressId">
-                        <option>Select your location</option>
+                    <select asp-for="VaccineInfoId" class="select-vaccination" asp-items="ViewBag.VaccineInfoId">
+                        <Option selected></Option>
                     </select>
+                    <span asp-validation-for="AddressId" class="text-danger"></span>
+                    <label class="select-location" for="Vaccinationinfo">Select location</label>
+                    <select asp-for="AddressId" class="select-location" asp-items="ViewBag.AddressId">
+                        <Option selected></Option>
+                    </select>
+                    <span asp-validation-for="AddressId" class="text-danger"></span>
                     <button type="submit" class="search-button" name="Search">Search</button>
                 </form>
             </div>

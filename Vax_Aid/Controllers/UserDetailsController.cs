@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Vax_Aid.Data;
 using Vax_Aid.Models;
 
+
 namespace Vax_Aid.Controllers
 {
+    
     public class UserDetailsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,6 +23,7 @@ namespace Vax_Aid.Controllers
         }
 
         // GET: UserDetails
+        
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.UserDetails.Include(u => u.Address);

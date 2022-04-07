@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,6 +26,7 @@ namespace Vax_Aid.Controllers
 
             return View();
         }
+
         [HttpPost]
         public IActionResult SearchNearestLocation(UserViewModel user)
         {
