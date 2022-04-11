@@ -116,7 +116,7 @@ namespace Vax_Aid.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", new { id = userDetails.UserDetailsId });
             }
             ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressName", userDetails.AddressId);
             return View(userDetails);

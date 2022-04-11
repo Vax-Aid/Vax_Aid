@@ -17,6 +17,7 @@
                 <label asp-for="LocationName" class="control-label"></label>
                 <input asp-for="LocationName" class="form-control" />
                 <span asp-validation-for="LocationName" class="text-danger"></span>
+                <input type="hidden" id="hdnMappedVaccine" asp-for="MappedVaccines" value=""/>
             </div>
             <div class="form-group">
                 <label asp-for="Latitude" class="control-label"></label>
@@ -34,6 +35,22 @@
             </div>
         </form>
     </div>
+
+    <div class="col-md-4">
+        <table class="table table-responsive table-bordered">
+            <tr>
+                <td></td>
+                <th>Vaccine Name</th>
+            </tr>
+            @foreach (VaccineInfo it in ViewBag.VaccineList as List<VaccineInfo>)
+            {
+                <tr>
+                    <td><input type="checkbox" class="chkVaccineInfo" data-key="@it.VaccineInfoId"></td>
+                    <td>@it.vaccineName</td>
+                </tr>
+            }
+        </table>
+    </div>
 </div>
 
 <div>
@@ -42,4 +59,18 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script>
+    $(document).on('change', '.chkVaccineInfo', function () {
+        var ids = [];
+        var allCheckBox = $('.chkVaccineInfo');
+        $.each(allCheckBox, function (i, x) {
+            if ($(this).is(':checked')) {
+                var id = $(this).data('key');
+                ids.push(id);
+            }
+        });
+        $('#hdnMappedVaccine').val(ids.join(','));
+    });
+</script>
 }

@@ -46,13 +46,15 @@ namespace Vax_Aid.Controllers
         // GET: VendorLocations/Create
         public IActionResult Create()
         {
+            ViewBag.VaccineList = _context.VaccineInfos.Where(x => x.Delete == false)
+                    .ToList();
             return View();
         }
 
         // POST: VendorLocations/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VendorLocationId,LocationName,Latitude,Longitude")] VendorLocation vendorLocation)
+        public async Task<IActionResult> Create([Bind("VendorLocationId,LocationName,Latitude,Longitude,MappedVaccines")] VendorLocation vendorLocation)
         {
             if (ModelState.IsValid)
             {
@@ -76,13 +78,15 @@ namespace Vax_Aid.Controllers
             {
                 return NotFound();
             }
+            ViewBag.VaccineList = _context.VaccineInfos.Where(x => x.Delete == false)
+                    .ToList();
             return View(vendorLocation);
         }
 
         // POST: VendorLocations/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VendorLocationId,LocationName,Latitude,Longitude")] VendorLocation vendorLocation)
+        public async Task<IActionResult> Edit(int id, [Bind("VendorLocationId,LocationName,Latitude,Longitude,MappedVaccines")] VendorLocation vendorLocation)
         {
             if (id != vendorLocation.VendorLocationId)
             {

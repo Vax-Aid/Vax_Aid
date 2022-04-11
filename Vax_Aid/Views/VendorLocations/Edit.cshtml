@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Edit @Model.MappedVaccines</h2>
 
 <h4>VendorLocation</h4>
 <hr />
@@ -18,6 +18,8 @@
                 <label asp-for="LocationName" class="control-label"></label>
                 <input asp-for="LocationName" class="form-control" />
                 <span asp-validation-for="LocationName" class="text-danger"></span>
+                <input type="hidden" id="hdnMappedVaccine" asp-for="MappedVaccines" />
+
             </div>
             <div class="form-group">
                 <label asp-for="Latitude" class="control-label"></label>
@@ -29,11 +31,26 @@
                 <input asp-for="Longitude" class="form-control" />
                 <span asp-validation-for="Longitude" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
+    </div>
+    <div class="col-md-4">
+        <table class="table table-responsive table-bordered">
+            <tr>
+                <td></td>
+                <th>Vaccine Name</th>
+            </tr>
+            @foreach (VaccineInfo it in ViewBag.VaccineList as List<VaccineInfo>)
+            {
+                <tr>
+                    <td><input type="checkbox" class="chkVaccineInfo" data-key="@it.VaccineInfoId"></td>
+                    <td>@it.vaccineName</td>
+                </tr>
+            }
+        </table>
     </div>
 </div>
 
@@ -43,4 +60,28 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            var ids = $('#hdnMappedVaccine').val();
+            var allIds = ids.split(',');
+            $.each(allIds, function (i, x) {
+                var id = $(this).data('key');
+                $(".chkVaccineInfo[data-key=" + x + "]").prop("checked", true);
+            })
+        });
+    </script>
+    <script>
+        $(document).on('change', '.chkVaccineInfo', function () {
+            var ids = [];
+            var allCheckBox = $('.chkVaccineInfo');
+            $.each(allCheckBox, function (i, x) {
+                if ($(this).is(':checked')) {
+                    var id = $(this).data('key');
+                    ids.push(id);
+                }
+            });
+            $('#hdnMappedVaccine').val(ids.join(','));
+        });
+    </script>
 }
