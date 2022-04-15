@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -28,14 +29,20 @@ namespace Vax_Aid.Controllers
         }
 
         [HttpPost]
-        public IActionResult SearchNearestLocation(UserViewModel user)
+        public IActionResult SearchNearestLocation(UserViewModelVM user)
         {
             var address =_context.Addresses.Where(x => x.AddressId == user.AddressId).FirstOrDefault();
-            var vendor = _context.VendorDetails.Where(x => x.VaccineInfoId == user.VaccineInfoId).ToList();
-            var allVendors = _context.VendorLocation.ToList();
+            var vendor = _context.VendorLocation.
+                Where(x => x.MappedVaccines.Contains( user.VaccineInfoId.ToString())).ToList();
+            var vaccineinfo = _context.VaccineInfos.Where(x => x.VaccineInfoId == user.VaccineInfoId).FirstOrDefault();
+            if(vaccineinfo != null)
+            {
+                ViewBag.VaccineInfoIdd = vaccineinfo.VaccineInfoId;
+                ViewBag.VaccineName = vaccineinfo.vaccineName;  
+             }
             ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName");
             List<Locationinf> locationinfo = new List<Locationinf>();
-            foreach (var item in allVendors)
+            foreach (var item in vendor)
             {
                 NearestNeighbour nearestNeighbour = new NearestNeighbour();
                 var pointer = nearestNeighbour.getDistanceFromLatLonInKm(address.Latitude, address.Longitude, item.Latitude, item.Longitude);

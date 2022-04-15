@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vax_Aid.Models
 {
-    public class UserViewModel
+    public class UserViewModelVM
     {
         public VaccineInfo vaccineInfo { get; set; }
 
@@ -16,5 +16,6 @@ namespace Vax_Aid.Models
         
         [Required]
         public int AddressId { get; set; }
+        public int VendorLocationId { get; set; }
     }
 }

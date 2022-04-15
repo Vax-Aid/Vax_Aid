@@ -1,4 +1,4 @@
-﻿@model Vax_Aid.Models.UserDetails
+﻿@model Vax_Aid.ViewModels.UserFormVM
 
 @{
     ViewData["Title"] = "Create";
@@ -7,7 +7,7 @@
 
 <h2>Create</h2>
 
-<h4>Fill Up the Following Details</h4>
+<h4>Fill Up the Following Details for booking @ViewBag.VaccineName at @ViewBag.LocationName</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">

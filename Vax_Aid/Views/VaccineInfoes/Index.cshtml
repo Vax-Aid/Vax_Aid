@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
-   
+
 }
 
 <h2>Index</h2>
@@ -39,7 +39,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td onclick="">
+                <td class="vaccineName" data-key="@item.VaccineInfoId">
                     @Html.DisplayFor(modelItem => item.vaccineName)
                 </td>
                 <td>
@@ -66,6 +66,41 @@
         }
     </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Centers where this vaccine is available...</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>SN </td>
+                            <td>Vendor Location</td>
+                        </tr>
+                    </thead>
+                    <tbody class="bodyVendorLocation">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 @section Scripts
 {
     <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
@@ -75,6 +110,51 @@
             $('#vaccineInfoDatatable').dataTable({
             });
         });
+        $(document).on('click', '.vaccineName', function () {
+            var id = $(this).data('key');
+            if (!id) {
+                alert('ID Not Found');
+                return;
+            }
+           $.ajax({
+                type: "get",
+                url: '@Url.Action("GetVendorMappedWithVaccine","VaccineInfoes")?vaccineid='+id,
+                //dataType: "jsonp",
+                //contentType: "application/json; charset=utf-8",
+               dataType: "application/json",
+               contentType: "application/json",
+                success: function (resp) {
+                    debugger;
+                    var resp = $.parseJSON(er.responseText)
+                    if (resp.success) {
+                        var list = resp.data;
+                        $('.bodyVendorLocation').html(mystring);
+
+                        $('#locationModal').modal('show');
+                    }
+                    
+                },
+               error: function (er) {
+                   var resp = $.parseJSON(er.responseText)
+                   if (resp.success) {
+                       debugger;
+                       var list = resp.data;
+                       var rows = '';
+                       var i = 1;
+                       list.forEach(function (vaccineInfo) {
+                           rows += `<tr><td> ${i} </td><td>${vaccineInfo.locationName}</td></tr>`;
+                           i++;
+                       });
+
+                       $('.bodyVendorLocation').html(rows);
+
+                       $('#locationModal').modal('show');
+                   }
+                   
+                   
+                }
+            });
+        })
     </script>
 
 }

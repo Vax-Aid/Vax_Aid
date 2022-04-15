@@ -140,10 +140,35 @@ namespace Vax_Aid.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         private bool VaccineInfoExists(int id)
         {
             return _context.VaccineInfos.Any(e => e.VaccineInfoId == id);
+        }
+
+        public JsonResult GetVendorMappedWithVaccine(int vaccineid)
+        {
+            bool isOk = false;
+            List<VendorLocation> locs = new List<VendorLocation>();
+            try
+            {
+                locs = _context.VendorLocation.Where(p => p.MappedVaccines.Contains(vaccineid.ToString())).ToList();
+                isOk = true;
+                if (locs.Count == 0)
+                {
+                    locs = new List<VendorLocation>();
+                }
+            }
+            catch (Exception ex)
+            {
+                isOk = false;
+            }
+            var json = Json(new
+            {
+                Success = isOk,
+                Data = locs
+            });
+
+            return json;
         }
     }
 }

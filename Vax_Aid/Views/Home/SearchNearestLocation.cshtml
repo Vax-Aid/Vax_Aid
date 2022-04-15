@@ -5,18 +5,20 @@
     <div class="body-div">
         <div class="vax-form">
             <div class="form-div" >
-                <form asp-action="Create" asp-controller="UserDetails">
-                <h1 style="margin-left:20px;">Nearest Vaccination Centres</h1><br/>
-                @foreach (var item in Model)
-                {
-                <div class="item-result">
-                    <ol><h3>@item.address <br /></h3></ol>
-                    <ol><h3>@item.pointer.</h3></ol>
-                    <button type="submit" class="search-button" name="Search">Apply Now</button>
-                    <hr />
-                </div>
-                    <br />
-                }
+                <form asp-action="Create" asp-controller="UserDetails" method="get">
+                    <input type="hidden" name="VaccineInfoId" value="@ViewBag.VaccineInfoIdd" />
+                    <h1 style="margin-left:20px;">Nearest Vaccination Centres for @ViewBag.VaccineName </h1><br />
+                    @foreach (var item in Model)
+                    {
+                        <input type="hidden" name="VendorLocationId" value="@item.VendorLocationId" />
+
+                        <div class="item-result">
+                            <ol><h3>@item.address <br /></h3></ol>
+                            <button type="submit" class="search-button" name="Search">Apply Now</button>
+                            <hr />
+                        </div>
+                        <br />
+                    }
                 </form>
             </div>
         </div>

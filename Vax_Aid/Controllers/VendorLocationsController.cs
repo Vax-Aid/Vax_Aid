@@ -39,6 +39,8 @@ namespace Vax_Aid.Controllers
             {
                 return NotFound();
             }
+            ViewBag.VaccineList = _context.VaccineInfos.Where(x => x.Delete == false)
+                    .ToList();
 
             return View(vendorLocation);
         }
