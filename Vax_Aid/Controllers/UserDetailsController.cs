@@ -53,17 +53,41 @@ namespace Vax_Aid.Controllers
         // GET: UserDetails/Create
         public IActionResult Create(UserViewModelVM vm)
         {
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressName", vm.AddressId);
+
             var vaccineinfo = _context.VaccineInfos.Where(x => x.VaccineInfoId == vm.VaccineInfoId).FirstOrDefault();
             if (vaccineinfo != null)
             {
+                ViewBag.VaccineInfoId = vaccineinfo.VaccineInfoId;
                 ViewBag.VaccineName = vaccineinfo.vaccineName;
             }
             var vendorlocation = _context.VendorLocation.Where(x => x.VendorLocationId == vm.VendorLocationId).FirstOrDefault();
             if (vendorlocation != null)
             {
+                ViewBag.VendorLocationId = vendorlocation.VendorLocationId;
                 ViewBag.LocationName = vendorlocation.LocationName;
             }
             return View();
+        }
+
+        public ActionResult CustomCreate(int vaccineInfoID, int vendorLocationID)
+        {
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressName", "");
+
+            var vaccineinfo = _context.VaccineInfos.Where(x => x.VaccineInfoId == vaccineInfoID).FirstOrDefault();
+            if (vaccineinfo != null)
+            {
+                ViewBag.VaccineInfoId = vaccineinfo.VaccineInfoId;
+                ViewBag.VaccineName = vaccineinfo.vaccineName;
+            }
+            var vendorlocation = _context.VendorLocation.Where(x => x.VendorLocationId == vendorLocationID).FirstOrDefault();
+            if (vendorlocation != null)
+            {
+                ViewBag.VendorLocationId = vendorlocation.VendorLocationId;
+                ViewBag.LocationName = vendorlocation.LocationName;
+            }
+            return View();
+
         }
 
         // POST: UserDetails/Create
@@ -82,7 +106,7 @@ namespace Vax_Aid.Controllers
         //}
         public IActionResult Create(UserFormVM vm)
         {
-            
+
             UserDetails model = new UserDetails()
             {
                 UserDetailsId = vm.UserDetailsId,
@@ -99,12 +123,16 @@ namespace Vax_Aid.Controllers
                 Occupation = vm.Occupation,
                 MedicalConditions = vm.MedicalConditions,
                 DoseType = vm.DoseType,
-                Disability = vm.Disability
+                Disability = vm.Disability,
+                VaccineInfoId = vm.VaccineInfoId,
+                VendorLocationId = vm.VendorLocationId
+
 
             };
             _context.Add(model);
             _context.SaveChanges();
             return View(vm);
+
         }
 
         // GET: UserDetails/Edit/5
@@ -186,6 +214,11 @@ namespace Vax_Aid.Controllers
             _context.UserDetails.Remove(userDetails);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        public IActionResult UserDashboard()
+        {
+            ViewData["Message"] = "User Dashboard.";
+            return View();
         }
 
         private bool UserDetailsExists(int id)

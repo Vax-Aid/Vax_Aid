@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,5 +28,15 @@ namespace Vax_Aid.Models
         public string MedicalConditions { get; set; }
         public string DoseType { get; set; }
         public bool Disability { get; set; }
+
+        public int VendorLocationId { get; set; }
+        public int VaccineInfoId { get; set; }
+
+
+        [ForeignKey("VendorLocationId")]
+        public VendorLocation VendorLocation { get; set; }
+        [ForeignKey("VaccineInfoId")]
+        public VaccineInfo VaccineInfo { get; set; }
+        public int FlowStatus { get; set; }
     }
 }

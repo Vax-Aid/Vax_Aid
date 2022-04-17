@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Vax_Aid.Data;
 using Vax_Aid.Models;
+using Vax_Aid.ViewModels;
 
 namespace Vax_Aid.Controllers
 {
@@ -56,15 +57,56 @@ namespace Vax_Aid.Controllers
         // POST: VendorLocations/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VendorLocationId,LocationName,Latitude,Longitude,MappedVaccines")] VendorLocation vendorLocation)
+        public async Task<IActionResult> Create(VendorFormVM vm)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(vendorLocation);
-                await _context.SaveChangesAsync();
+                if (_context.Users.Where(x => x.UserName == vm.UserName).Any())
+                {
+                    ViewBag.ErrorMessage = "Username Already Exists";
+                    ViewBag.VaccineList = _context.VaccineInfos.Where(x => x.Delete == false)
+                   .ToList();
+                    return View(vm);
+                }
+                else
+                {
+                    Microsoft.AspNetCore.Identity.IdentityUser usr = new Microsoft.AspNetCore.Identity.IdentityUser() {
+                        UserName = vm.UserName,
+                        PasswordHash = "AQAAAAEAACcQAAAAEHBOdnKIq1a7WGsmvBiJ4Bq3miRzhbnL7PVMPzHoY7JtqZ07qZr0EAoSmStXlx58SA==",
+                        NormalizedUserName = vm.UserName,
+                        Email = vm.Email,
+                        NormalizedEmail = vm.Email,
+                        EmailConfirmed = false,
+                        PhoneNumberConfirmed = false,
+                        TwoFactorEnabled = false,
+                        LockoutEnabled = true,
+                        AccessFailedCount = 0
+                    };
+                    _context.Users.Add(usr);
+
+                    _context.UserRoles.Add(new Microsoft.AspNetCore.Identity.IdentityUserRole<string>()
+                    {
+                         RoleId = "3",
+                          UserId = usr.Id
+                    });
+
+                    VendorLocation model = new VendorLocation()
+                    {
+                        VendorLocationId = vm.VendorLocationId,
+                        LocationName = vm.LocationName,
+                        Latitude = vm.Latitude,
+                        Longitude = vm.Longitude,
+                        MappedVaccines = vm.MappedVaccines,
+                        UserID = usr.Id
+                    };
+                    _context.VendorLocation.Add(model);
+
+                   
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(vendorLocation);
+            return View(vm);
         }
 
         // GET: VendorLocations/Edit/5
@@ -145,6 +187,13 @@ namespace Vax_Aid.Controllers
             _context.VendorLocation.Remove(vendorLocation);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        public IActionResult VendorDashboard()
+        {
+            
+
+            ViewData["Message"] = "Vendor Dashboard.";
+            return View();
         }
 
         private bool VendorLocationExists(int id)

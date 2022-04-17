@@ -22,24 +22,49 @@ namespace Vax_Aid.Controllers
         }
         public IActionResult Index()
         {
-            ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName");
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressName");
+            if (User.Identity.IsAuthenticated)
+            {
+                // get roles if login only
+                // if roles = 3 (Vendor) go to home/VendorDashboard
+                // if roels = 2 (Users) got to home/Patient User
+                // else (Admin) go to home /adminIndex
 
+               if (User.IsInRole("vendor"))
+                {
+                    return RedirectToAction("VendorDashboard", "VendorLocations");
+                }
+                if (User.IsInRole("user"))
+                {
+                    return RedirectToAction("UserDashboard", "UserDetails");
+                }
+                else
+                {
+                    return RedirectToAction("AdminDashboard", "Home");
+
+                }
+
+            }
+            else
+            {
+                ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName");
+                ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressName");
+
+            }
             return View();
         }
 
         [HttpPost]
         public IActionResult SearchNearestLocation(UserViewModelVM user)
         {
-            var address =_context.Addresses.Where(x => x.AddressId == user.AddressId).FirstOrDefault();
+            var address = _context.Addresses.Where(x => x.AddressId == user.AddressId).FirstOrDefault();
             var vendor = _context.VendorLocation.
-                Where(x => x.MappedVaccines.Contains( user.VaccineInfoId.ToString())).ToList();
+                Where(x => x.MappedVaccines.Contains(user.VaccineInfoId.ToString())).ToList();
             var vaccineinfo = _context.VaccineInfos.Where(x => x.VaccineInfoId == user.VaccineInfoId).FirstOrDefault();
-            if(vaccineinfo != null)
+            if (vaccineinfo != null)
             {
                 ViewBag.VaccineInfoIdd = vaccineinfo.VaccineInfoId;
-                ViewBag.VaccineName = vaccineinfo.vaccineName;  
-             }
+                ViewBag.VaccineName = vaccineinfo.vaccineName;
+            }
             ViewData["VaccineInfoId"] = new SelectList(_context.VaccineInfos, "VaccineInfoId", "vaccineName");
             List<Locationinf> locationinfo = new List<Locationinf>();
             foreach (var item in vendor)
@@ -50,21 +75,20 @@ namespace Vax_Aid.Controllers
                 {
                     VendorLocationId = item.VendorLocationId,
                     address = item.LocationName,
-                    pointer = pointer 
+                    pointer = pointer
                 });
                 //get nearest location (address lat, address lon, item.lat, item.long)
                 //pointer, 
             }
 
             locationinfo = locationinfo.OrderBy(x => x.pointer).Take(5).ToList();
-
             //locationinfo.Sort(x => x.pointer);
 
             ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressName");
 
             return View(locationinfo);
         }
-       
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -79,8 +103,9 @@ namespace Vax_Aid.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AdminDashboard()
         {
+            ViewData["Message"] = "Admin Dashboard.";
             return View();
         }
 
@@ -97,4 +122,6 @@ namespace Vax_Aid.Controllers
         public string address { get; set; }
         public int VendorLocationId { get; set; }
     }
+
+
 }

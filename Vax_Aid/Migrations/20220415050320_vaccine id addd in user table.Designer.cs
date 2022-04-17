@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vax_Aid.Data;
 
 namespace Vax_Aid.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220415050320_vaccine id addd in user table")]
+    partial class vaccineidadddinusertable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -327,7 +329,13 @@ namespace Vax_Aid.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<int?>("VaccineID")
+                        .HasColumnType("int");
+
                     b.Property<int>("VaccineInfoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VendorID")
                         .HasColumnType("int");
 
                     b.Property<int>("VendorLocationId")
@@ -337,9 +345,9 @@ namespace Vax_Aid.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.HasIndex("VaccineInfoId");
+                    b.HasIndex("VaccineID");
 
-                    b.HasIndex("VendorLocationId");
+                    b.HasIndex("VendorID");
 
                     b.ToTable("UserDetails");
                 });
@@ -448,9 +456,6 @@ namespace Vax_Aid.Migrations
                     b.Property<string>("MappedVaccines")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("VendorLocationId");
 
                     b.ToTable("VendorLocation");
@@ -544,15 +549,11 @@ namespace Vax_Aid.Migrations
 
                     b.HasOne("Vax_Aid.Models.VaccineInfo", "VaccineInfo")
                         .WithMany()
-                        .HasForeignKey("VaccineInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VaccineID");
 
                     b.HasOne("Vax_Aid.Models.VendorLocation", "VendorLocation")
                         .WithMany()
-                        .HasForeignKey("VendorLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VendorID");
 
                     b.Navigation("Address");
 

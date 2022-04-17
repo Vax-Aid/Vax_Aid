@@ -1,4 +1,4 @@
-﻿@model Vax_Aid.Models.VendorLocation
+﻿@model Vax_Aid.ViewModels.VendorFormVM;
 
 @{
     ViewData["Title"] = "Create";
@@ -9,15 +9,15 @@
 
 <h4>VendorLocation</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="LocationName" class="control-label"></label>
                 <input asp-for="LocationName" class="form-control" />
                 <span asp-validation-for="LocationName" class="text-danger"></span>
-                <input type="hidden" id="hdnMappedVaccine" asp-for="MappedVaccines" value=""/>
+                <input type="hidden" id="hdnMappedVaccine" asp-for="MappedVaccines" value="" />
             </div>
             <div class="form-group">
                 <label asp-for="Latitude" class="control-label"></label>
@@ -29,29 +29,51 @@
                 <input asp-for="Longitude" class="form-control" />
                 <span asp-validation-for="Longitude" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
-        </form>
-    </div>
-
-    <div class="col-md-4">
-        <table class="table table-responsive table-bordered">
-            <tr>
-                <td></td>
-                <th>Vaccine Name</th>
-            </tr>
-            @foreach (VaccineInfo it in ViewBag.VaccineList as List<VaccineInfo>)
-            {
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" type="text" name="Username" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" type="text" name="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" type="password" name="Password"/>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" type="password" name="ConfirmPassword"/>
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <table class="table table-responsive table-bordered">
                 <tr>
-                    <td><input type="checkbox" class="chkVaccineInfo" data-key="@it.VaccineInfoId"></td>
-                    <td>@it.vaccineName</td>
+                    <td></td>
+                    <th>Vaccine Name</th>
                 </tr>
-            }
-        </table>
+                @foreach (VaccineInfo it in ViewBag.VaccineList as List<VaccineInfo>)
+                {
+                    <tr>
+                        <td><input type="checkbox" class="chkVaccineInfo" data-key="@it.VaccineInfoId"></td>
+                        <td>@it.vaccineName</td>
+                    </tr>
+                }
+            </table>
+        </div>
+
     </div>
-</div>
+</form>
 
 <div>
     <a asp-action="Index">Back to List</a>
@@ -61,16 +83,22 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
 <script>
-    $(document).on('change', '.chkVaccineInfo', function () {
-        var ids = [];
-        var allCheckBox = $('.chkVaccineInfo');
-        $.each(allCheckBox, function (i, x) {
-            if ($(this).is(':checked')) {
-                var id = $(this).data('key');
-                ids.push(id);
+        $(document).ready(function () {
+            if ('@ViewBag.ErrorMessage' != '') {
+                alert('@ViewBag.ErrorMessage');
             }
         });
-        $('#hdnMappedVaccine').val(ids.join(','));
-    });
+
+        $(document).on('change', '.chkVaccineInfo', function () {
+            var ids = [];
+            var allCheckBox = $('.chkVaccineInfo');
+            $.each(allCheckBox, function (i, x) {
+                if ($(this).is(':checked')) {
+                    var id = $(this).data('key');
+                    ids.push(id);
+                }
+            });
+            $('#hdnMappedVaccine').val(ids.join(','));
+        });
 </script>
 }
