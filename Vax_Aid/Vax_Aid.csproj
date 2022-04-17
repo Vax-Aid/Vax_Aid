@@ -15,6 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\BookingDetails.cs" />
+    <Compile Remove="Models\Vaccination.cs" />
+    <Compile Remove="Models\VendorDetails.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="C:\Users\nischal uprety\.nuget\packages\datatables.net\1.11.3\contentFiles\any\any\wwwroot\js\jquery.dataTables.js" />
     <Content Remove="C:\Users\nischal uprety\.nuget\packages\datatables.net\1.11.3\contentFiles\any\any\wwwroot\js\jquery.dataTables.min.js" />
   </ItemGroup>

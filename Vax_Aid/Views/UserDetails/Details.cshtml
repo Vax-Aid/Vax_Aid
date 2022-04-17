@@ -8,9 +8,10 @@
 
 
 <div style="margin-top:100px">
-    <h4>You have Successfully applied for vaccination.</h4><br/>
+    <h4>You have Successfully applied for vaccination.</h4><br />
     <h5 style="color:brown">(Take Screenshot or Print this document)</h5>
-    <h4> Please Review Your Details</h4>
+    <h4>Selected Vaccine: @Html.DisplayFor(model => model.VaccineInfo.vaccineName) </h4>
+    <h4>Selected Vaccination Centre: @Html.DisplayFor(model => model.VendorLocation.LocationName) </h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>

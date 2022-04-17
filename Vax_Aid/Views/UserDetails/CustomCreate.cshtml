@@ -25,12 +25,39 @@
             </div>
             <div class="form-group">
                 <label asp-for="Ethnicity" class="control-label"></label>
-                <input asp-for="Ethnicity" class="form-control" />
+                <select asp-for="Ethnicity" class="form-control">
+                    <option value="NULL" selected>--Select--</option>
+                    <option value="Brahmin">Brahmin</option>
+                    <option value="Chhetri">Chhetri</option>
+                    <option value="Newar">Newar</option>
+                    <option value="Rai">Rai</option>
+                    <option value="Limbu">Limbu</option>
+                    <option value="Magar">Magar</option>
+                    <option value="Gurung">Gurung</option>
+                    <option value="Tharu">Tharu</option>
+                    <option value="Tamang">Tamang</option>
+                    <option value="Sherpa">Sherpa</option>
+                    <option value="Thakuri">Thakuri</option>
+                    <option value="Kami">Kami</option>
+                    <option value="Damai">Damai</option>
+                    <option value="Sharki">Sharki</option>
+                    <option value="Dhimal">Dhimal</option>
+                    <option value="Thakali">Thakali</option>
+                    <option value="Chepang">Chepang</option>
+                    <option value="Raute">Raute</option>
+                    <option value="Mushar">Mushar</option>
+                    <option value="Others">others</option>
+                </select>
                 <span asp-validation-for="Ethnicity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Gender" class="control-label"></label>
-                <input asp-for="Gender" class="form-control" />
+                <select asp-for="Gender" class="form-control">
+                    <option value="" selected>--Select--</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">other</option>
+                </select>
                 <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -40,7 +67,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="AddressId" class="control-label"></label>
-                <select asp-for="AddressId" class="form-control" asp-items="ViewBag.AddressId"></select>
+                <select asp-for="AddressId" class="form-control" asp-items="ViewBag.AddressId">
+                    <option value="" selected>--Select--</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
@@ -59,7 +88,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdentityType" class="control-label"></label>
-                <input asp-for="IdentityType" class="form-control" />
+                <select asp-for="IdentityType" class="form-control">
+                    <option value="" selected>--Select--</option>
+                    <option value="Citizenship">Citizenship</option>
+                    <option value="Passport">Passport</option>
+                    <option value="BirthCertificate">Birth Certificate</option>
+                    <option value="VoterID">Voter ID</option>
+
+                </select>
                 <span asp-validation-for="IdentityType" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -79,7 +115,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="DoseType" class="control-label"></label>
-                <input asp-for="DoseType" class="form-control" />
+                <select asp-for="DoseType" class="form-control">
+                    <option value="" selected>--Select--</option>
+                    <option value="First">First</option>
+                    <option value="Second">Second</option>
+                    <option value="Booster">Booster</option>
+                </select>
                 <span asp-validation-for="DoseType" class="text-danger"></span>
             </div>
             <div class="form-group">

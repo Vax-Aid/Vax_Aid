@@ -15,13 +15,8 @@ namespace Vax_Aid.Data
         }
         public DbSet<VaccineInfo> VaccineInfos { get; set; }
         public DbSet<UserDetails> UserDetails { get; set; }
-        public DbSet<BookingDetails> BookingDetails { get; set; }
-        public DbSet<VendorDetails> VendorDetails { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<VendorLocation> VendorLocation { get; set; }
-        public DbSet<Vaccination> Vaccinations { get; set; }
-
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {            
             base.OnConfiguring(optionsBuilder);

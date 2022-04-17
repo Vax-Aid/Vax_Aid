@@ -14,17 +14,25 @@ namespace Vax_Aid.ViewModels
         [StringLength(255)]
         public string UserName { get; set; }
         public string Ethnicity { get; set; }
+        [Required]
         public string Gender { get; set; }
+        [Required]
         public DateTime DateofBirth { get; set; }
         public Address Address { get; set; }
+        [Required]
         public int AddressId { get; set; }
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Not a valid Email")]
         public string Email { get; set; }
         public decimal Phone { get; set; }
+        [Required]
         public string Nationality { get; set; }
+        [Required]
         public string IdentityType { get; set; }
+        [Required]
         public string IdentityNo { get; set; }
         public string Occupation { get; set; }
         public string MedicalConditions { get; set; }
+        [Required]
         public string DoseType { get; set; }
         public bool Disability { get; set; }
     

@@ -15,6 +15,12 @@
                     @Html.DisplayNameFor(model => model.UserName)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.VaccineInfo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VendorLocation)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Ethnicity)
                 </th>
                 <th>
@@ -62,6 +68,12 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VaccineInfo.vaccineName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VendorLocation.LocationName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Ethnicity)

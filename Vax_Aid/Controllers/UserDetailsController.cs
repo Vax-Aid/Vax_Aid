@@ -27,7 +27,8 @@ namespace Vax_Aid.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.UserDetails.Include(u => u.Address);
+            var applicationDbContext = _context.UserDetails.Include(u => u.Address).Include(u => u.VaccineInfo)
+                .Include(u => u.VendorLocation);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -41,6 +42,8 @@ namespace Vax_Aid.Controllers
 
             var userDetails = await _context.UserDetails
                 .Include(u => u.Address)
+                .Include(u => u.VaccineInfo)
+                .Include(u => u.VendorLocation)
                 .FirstOrDefaultAsync(m => m.UserDetailsId == id);
             if (userDetails == null)
             {
@@ -126,11 +129,14 @@ namespace Vax_Aid.Controllers
                 Disability = vm.Disability,
                 VaccineInfoId = vm.VaccineInfoId,
                 VendorLocationId = vm.VendorLocationId
-
-
             };
-            _context.Add(model);
-            _context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _context.Add(model);
+                _context.SaveChanges();
+                return RedirectToAction("Details", new { id = model.UserDetailsId });
+
+            }
             return View(vm);
 
         }
@@ -155,15 +161,15 @@ namespace Vax_Aid.Controllers
         // POST: UserDetails/Edit/5.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserDetailsId,UserName,Ethnicity,Gender,DateofBirth,AddressId,Email,Phone,Nationality,IdentityType,IdentityNo,Occupation,MedicalConditions,DoseType,Disability")] UserDetails userDetails)
+        public async Task<IActionResult> Edit(int id, UserDetails userDetails)
         {
             if (id != userDetails.UserDetailsId)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            
+            
                 try
                 {
                     _context.Update(userDetails);
@@ -181,7 +187,7 @@ namespace Vax_Aid.Controllers
                     }
                 }
                 return RedirectToAction("Details", new { id = userDetails.UserDetailsId });
-            }
+            
             ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressName", userDetails.AddressId);
             return View(userDetails);
         }
