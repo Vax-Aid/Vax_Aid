@@ -1,4 +1,4 @@
-﻿@model List<Vax_Aid.Models.UserDetails>
+﻿@model IEnumerable<Vax_Aid.Models.UserDetails>
 @{
     ViewData["Title"] = "Vendor Dashboard";
 }
@@ -6,9 +6,132 @@
 
 <h3>This is Vendor Dashboard...</h3>
 
-@foreach (var item in Model)
-{
-    <p>@item.UserName</p>
-    <p>@item.VaccineInfo</p>
+<div style="overflow: auto;">
+    <table id="userDetailsDatatable" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%;">
 
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VaccineInfo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VendorLocation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ethnicity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateofBirth)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nationality)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdentityType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdentityNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Occupation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MedicalConditions)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DoseType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Disability)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VaccineInfo.vaccineName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VendorLocation.LocationName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ethnicity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateofBirth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address.AddressName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nationality)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdentityType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdentityNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Occupation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MedicalConditions)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DoseType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Disability)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.UserDetailsId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.UserDetailsId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.UserDetailsId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts
+{
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#userDetailsDatatable').dataTable({
+            });
+        });
+    </script>
 }
