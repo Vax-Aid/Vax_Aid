@@ -130,7 +130,7 @@ namespace Vax_Aid.Controllers
         // POST: VendorLocations/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VendorLocationId,LocationName,Latitude,Longitude,MappedVaccines")] VendorLocation vendorLocation)
+        public async Task<IActionResult> Edit(int id, VendorLocation vendorLocation)
         {
             if (id != vendorLocation.VendorLocationId)
             {
@@ -190,10 +190,29 @@ namespace Vax_Aid.Controllers
         }
         public IActionResult VendorDashboard()
         {
-            
+            string vandorEmail = User.Identity.Name;
+            List<UserDetails> userDetailsList = new List<UserDetails>();
+            var user = _context.Users.Where(x => x.UserName == vandorEmail).FirstOrDefault();
+            if (user == null)
+            {
+                // validate user not login case
+            }
+            else
+            {
+                string id = user.Id;
+            }
+            var vendor = _context.VendorLocation.Where(x => x.UserID == user.Id).FirstOrDefault();
+            if (vendor == null)
+            {
+                // validate vendor not found case
+            }
+            else
+            {
+                userDetailsList = _context.UserDetails.Where(x => x.VendorLocationId == vendor.VendorLocationId).ToList();
+            }
 
             ViewData["Message"] = "Vendor Dashboard.";
-            return View();
+            return View(userDetailsList);
         }
 
         private bool VendorLocationExists(int id)

@@ -1,6 +1,14 @@
-﻿@{
+﻿@model List<Vax_Aid.Models.UserDetails>
+@{
     ViewData["Title"] = "Vendor Dashboard";
 }
 <h2>@ViewData["Title"]</h2>
 
 <h3>This is Vendor Dashboard...</h3>
+
+@foreach (var item in Model)
+{
+    <p>@item.UserName</p>
+    <p>@item.VaccineInfo</p>
+
+}
