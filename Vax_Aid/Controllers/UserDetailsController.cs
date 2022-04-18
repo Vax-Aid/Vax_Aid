@@ -230,5 +230,26 @@ namespace Vax_Aid.Controllers
         {
             return _context.UserDetails.Any(e => e.UserDetailsId == id);
         }
+
+        public JsonResult GetUserDetailsInfoByID(int userid)
+        {
+            var userDetailInfo = _context.UserDetails.Where(x => x.UserDetailsId == userid).FirstOrDefault();
+            if (userDetailInfo != null)
+            {
+                return Json(new
+                {
+                    Success = true,
+                    Data = userDetailInfo
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    Success = false,
+                    Message = "Data Not Found."
+                });
+            }
+        }
     }
 }
