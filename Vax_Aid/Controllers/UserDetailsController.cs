@@ -226,7 +226,6 @@ namespace Vax_Aid.Controllers
             ViewData["Message"] = "User Dashboard.";
             return View();
         }
-
         private bool UserDetailsExists(int id)
         {
             return _context.UserDetails.Any(e => e.UserDetailsId == id);

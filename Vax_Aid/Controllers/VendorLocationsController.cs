@@ -188,8 +188,10 @@ namespace Vax_Aid.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        
         public IActionResult VendorDashboard()
         {
+
             string vandorEmail = User.Identity.Name;
             List<UserDetails> userDetailsList = new List<UserDetails>();
             var user = _context.Users.Where(x => x.UserName == vandorEmail).FirstOrDefault();
@@ -208,7 +210,7 @@ namespace Vax_Aid.Controllers
             }
             else
             {
-                userDetailsList = _context.UserDetails.Where(x => x.VendorLocationId == vendor.VendorLocationId).ToList();
+                userDetailsList = _context.UserDetails.Where(x => x.VendorLocationId == vendor.VendorLocationId).Include(u => u.Address).Include(u => u.VaccineInfo).ToList();
             }
 
             ViewData["Message"] = "Vendor Dashboard.";

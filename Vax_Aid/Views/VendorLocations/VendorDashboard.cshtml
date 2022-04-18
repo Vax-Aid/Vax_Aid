@@ -4,7 +4,7 @@
 }
 <h2>@ViewData["Title"]</h2>
 
-<h3>This is Vendor Dashboard...</h3>
+<h3>Welcome Vendor...</h3>
 
 <div style="overflow: auto;">
     <table id="userDetailsDatatable" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%;">
@@ -115,9 +115,7 @@
                         @Html.DisplayFor(modelItem => item.Disability)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.UserDetailsId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.UserDetailsId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.UserDetailsId">Delete</a>
+                        <button class="btn btn-primary" asp-action="Details" asp-route-id="@item.UserDetailsId">Details</button> 
                     </td>
                 </tr>
             }

@@ -38,5 +38,6 @@ namespace Vax_Aid.Models
         [ForeignKey("VaccineInfoId")]
         public VaccineInfo VaccineInfo { get; set; }
         public int FlowStatus { get; set; }
+        public string Remarks { get; set; }
     }
 }
