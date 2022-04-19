@@ -211,7 +211,9 @@ namespace Vax_Aid.Controllers
             else
             {
                 userDetailsList = _context.UserDetails.Where(x => x.VendorLocationId == vendor.VendorLocationId).Include(u => u.Address).Include(u => u.VaccineInfo).ToList();
+                
             }
+            
 
             ViewData["Message"] = "Vendor Dashboard.";
             return View(userDetailsList);

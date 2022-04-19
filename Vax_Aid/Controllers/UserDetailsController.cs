@@ -251,5 +251,29 @@ namespace Vax_Aid.Controllers
                 });
             }
         }
+        public JsonResult AddStatusAndRemarks(int id,int status, string remarks)
+        {
+            var userDetails = _context.UserDetails.Where(x => x.UserDetailsId == id).FirstOrDefault();
+            if (userDetails == null)
+            {
+                return Json(new
+                {
+                    Success = false,
+                    Message = "User Detail Not Found"
+                });
+            }
+            else
+            {
+                userDetails.FlowStatus = status;
+                userDetails.Remarks = remarks;
+                _context.SaveChanges();
+                return Json(new
+                {
+                    Success = true,
+                    Message = "Data Save Success"
+                });
+            }
+
+        }
     }
 }

@@ -59,89 +59,172 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Disability)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FlowStatus)
+                </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.VaccineInfo.vaccineName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.VendorLocation.LocationName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ethnicity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gender)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateofBirth)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address.AddressName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Phone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nationality)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdentityType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdentityNo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Occupation)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MedicalConditions)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DoseType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Disability)
-                    </td>
-                    <td>
-                        <button class="btn btn-primary btnDetail" data-key="@item.UserDetailsId">Details</button>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VaccineInfo.vaccineName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VendorLocation.LocationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ethnicity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateofBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address.AddressName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nationality)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdentityType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdentityNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Occupation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedicalConditions)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoseType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Disability)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlowStatus)
+                </td>
+                <td>
+                    <button class="btn btn-primary btnDetail" data-key="@item.UserDetailsId">Details</button>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="userDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">User Details</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <table>
-                    <tbody class="bodyUserDetails">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-responsive">
+                            <tr>
+                                <td>User name</td>
+                                <td class="tdUsername"></td>
+                            </tr>
+                            <tr>
+                                <td>Ethnicity</td>
+                                <td class="tdEthnicity"></td>
+                            </tr>
+                            <tr>
+                                <td>DateofBirth</td>
+                                <td class="tdDateofBirth"></td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td class="tdAddress"></td>
+                            </tr>
+                            <tr>
+                                <td>Gender</td>
+                                <td class="tdGender"></td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td class="tdEmail"></td>
+                            </tr>
+                            <tr>
+                                <td>Phone</td>
+                                <td class="tdPhone"></td>
+                            </tr>
+                            <tr>
+                                <td>Nationality</td>
+                                <td class="tdNationality"></td>
+                            </tr>
+                            <tr>
+                                <td>IdentityType</td>
+                                <td class="tdIdentityType"></td>
+                            </tr>
+                            <tr>
+                                <td>IdentityNo</td>
+                                <td class="tdIdentityNo"></td>
+                            </tr>
+                            <tr>
+                                <td>Occupation</td>
+                                <td class="tdOccupation"></td>
+                            </tr>
+                            <tr>
+                                <td>MedicalConditions</td>
+                                <td class="tdMedicalConditions"></td>
+                            </tr>
+                            <tr>
+                                <td>DoseType</td>
+                                <td class="tdDoseType"></td>
+                            </tr>
+                            <tr>
+                                <td>VaccineInfo</td>
+                                <td class="tdVaccineInfo"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Status</label><br />
+                                <select class="form-control ddlStatus ">
+                                    <option value="0">Unchecked</option>
+                                    <option value="1">Vaccinated</option>
+                                    <option value="2">Unvaccinated</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8">
+                                <label>Remarks</label><br />
+                                <input type="text" class="form-control txtRemarks"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                    </tbody>
-                </table>
             </div>
             <div class="modal-footer">
+                <input type="hidden" class="hdnUserDetailID" value=""/>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary btnSave">Save changes</button>
             </div>
         </div>
     </div>
@@ -163,26 +246,77 @@
                 alert('ID Not Found');
                 return;
             }
-           $.ajax({
+            $.ajax({
                 type: "get",
-                url: '@Url.Action("GetUserDetailsInfoByID", "UserDetails")?userid='+id,
-               dataType: "application/json",
-               contentType: "application/json",
+                url: '@Url.Action("GetUserDetailsInfoByID", "UserDetails")?userid=' + id,
+                dataType: "application/json",
+                contentType: "application/json",
                 success: function (resp) {
                     debugger;
                     if (resp.success) {
                         var data = resp.Data;
-                        //asdfas
-                    } elses{
+
+                    } else {
                         alert(resp.data);
                     }
 
                 },
-               error: function (er) {
-                   debugger;
+                error: function (er) {
+                    var resp = $.parseJSON(er.responseText)
+                    if (resp.success) {
+                        var data = resp.data;
+                        debugger;
+                        $('.tdUsername').html(data.userName)
+                        $('.tdEthnicity').html(data.ethnicity)
+                        $('.tdDateofBirth').html(data.dateofBirth)
+                        $('.tdAddress').html(data.addressId)
+                        $('.tdGender').html(data.gender)
+                        $('.tdEmail').html(data.email)
+                        $('.tdPhone').html(data.phone)
+                        $('.tdNationality').html(data.nationality)
+                        $('.tdIdentityType').html(data.identityType)
+                        $('.tdIdentityNo').html(data.identityNo)
+                        $('.tdOccupation').html(data.occupation)
+                        $('.tdMedicalConditions').html(data.medicalConditions)
+                        $('.tdDoseType').html(data.doseType)
+                        $('.tdVaccineInfo').html(data.vaccineInfoId)
 
+                        $('.hdnUserDetailID').val(data.userDetailsId);
+
+                        $('#myModal').modal('show');
+                    }
                 }
             });
+        });
+        $(document).on('click', '.btnSave', function () {
+            debugger;
+            var id = $('.hdnUserDetailID').val();
+            var status = $('.ddlStatus').val();
+            var remarks = $('.txtRemarks').val();
+            if (!id) {
+                alert('ID Not Found');
+                return;
+            }
+            $.ajax({
+                type: "get",
+                url: '@Url.Action("AddStatusAndRemarks", "UserDetails")?id=' + id+'&status='+status+'&remarks='+remarks,
+                dataType: "application/json",
+                contentType: "application/json",
+                success: function (savingStatus) {
+                    debugger;
+
+                },
+                error: function (er) {
+                    var resp = $.parseJSON(er.responseText);
+                    if (resp.success) {
+                        alert(resp.message);
+                        $('#myModal').modal('hide');
+                    } else {
+                        alert(resp.message);
+                    }
+
+                }
+            })
         })
 
     </script>
