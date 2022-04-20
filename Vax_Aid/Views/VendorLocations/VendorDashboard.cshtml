@@ -18,12 +18,6 @@
                     @Html.DisplayNameFor(model => model.VaccineInfo)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.VendorLocation)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Ethnicity)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Gender)
                 </th>
                 <th>
@@ -48,9 +42,6 @@
                     @Html.DisplayNameFor(model => model.IdentityNo)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Occupation)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.MedicalConditions)
                 </th>
                 <th>
@@ -68,66 +59,73 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VaccineInfo.vaccineName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VendorLocation.LocationName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ethnicity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Gender)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateofBirth)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address.AddressName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nationality)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdentityType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdentityNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Occupation)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MedicalConditions)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DoseType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Disability)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FlowStatus)
-                </td>
-                <td>
-                    <button class="btn btn-primary btnDetail" data-key="@item.UserDetailsId">Details</button>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VaccineInfo.vaccineName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateofBirth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address.AddressName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nationality)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdentityType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdentityNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MedicalConditions)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DoseType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Disability)
+                    </td>
+                    <td>
+                        @if (item.FlowStatus == 0)
+                        {
+                            <label class="badge label-info badge-info">Unchecked</label>
+                        }
+                        else if (item.FlowStatus == 1)
+                        {
+                            <label class="badge label-success badge-success">Vaccinated</label>
+                        }
+                        else if (item.FlowStatus == 2)
+                        {
+                            <label class="badge label-danger badge-danger">Unvaccinated</label>
+                        }
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btnDetail" data-key="@item.UserDetailsId">Details</button>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
+    <figure class="highcharts-figure">
+        <div id="pieChart"></div>
+    </figure>
+
 </div>
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -214,7 +212,7 @@
                             </div>
                             <div class="col-md-8">
                                 <label>Remarks</label><br />
-                                <input type="text" class="form-control txtRemarks"/>
+                                <input type="text" class="form-control txtRemarks" />
                             </div>
                         </div>
                     </div>
@@ -222,7 +220,7 @@
 
             </div>
             <div class="modal-footer">
-                <input type="hidden" class="hdnUserDetailID" value=""/>
+                <input type="hidden" class="hdnUserDetailID" value="" />
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary btnSave">Save changes</button>
             </div>
@@ -234,6 +232,10 @@
 {
     <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#userDetailsDatatable').dataTable({
@@ -318,6 +320,79 @@
                 }
             })
         })
+        $(document).ready(function () {
+            loadChartData();
 
+        });
+        function loadChartData() {
+            $.ajax({
+                type: "get",
+                url: '@Url.Action("GetDataForPieChart", "VendorLocations")',
+                dataType: "application/json",
+                contentType: "application/json",
+                success: function (savingStatus) {
+                    debugger;
+
+                },
+                error: function (er) {
+                    var resp = $.parseJSON(er.responseText);
+                    debugger;
+                    if (resp.success) {
+                        var serverData = resp.data;
+                        var graphData = [];
+                        var innerObject = serverData.map(function (x) {
+                            return {
+                                name: x.flowStatus,
+                                y: x.totalCount
+                            }
+                        });
+                        graphData.push({
+                            name: 'Vaccination',
+                            colorByPoint: true,
+                            data: innerObject
+                        });
+                        loadChart(graphData)
+                    } else {
+                        alert(resp.message);
+                    }
+
+                }
+            })
+
+        }
+
+
+        function loadChart(graphData) {
+            Highcharts.chart('pieChart', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Vaccination Details'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: graphData
+            });
+        }
     </script>
 }

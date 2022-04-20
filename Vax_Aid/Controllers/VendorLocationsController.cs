@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -70,7 +71,8 @@ namespace Vax_Aid.Controllers
                 }
                 else
                 {
-                    Microsoft.AspNetCore.Identity.IdentityUser usr = new Microsoft.AspNetCore.Identity.IdentityUser() {
+                    Microsoft.AspNetCore.Identity.IdentityUser usr = new Microsoft.AspNetCore.Identity.IdentityUser()
+                    {
                         UserName = vm.UserName,
                         PasswordHash = "AQAAAAEAACcQAAAAEHBOdnKIq1a7WGsmvBiJ4Bq3miRzhbnL7PVMPzHoY7JtqZ07qZr0EAoSmStXlx58SA==",
                         NormalizedUserName = vm.UserName,
@@ -86,8 +88,8 @@ namespace Vax_Aid.Controllers
 
                     _context.UserRoles.Add(new Microsoft.AspNetCore.Identity.IdentityUserRole<string>()
                     {
-                         RoleId = "3",
-                          UserId = usr.Id
+                        RoleId = "3",
+                        UserId = usr.Id
                     });
 
                     VendorLocation model = new VendorLocation()
@@ -101,7 +103,7 @@ namespace Vax_Aid.Controllers
                     };
                     _context.VendorLocation.Add(model);
 
-                   
+
                     await _context.SaveChangesAsync();
                 }
                 return RedirectToAction(nameof(Index));
@@ -188,7 +190,7 @@ namespace Vax_Aid.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        
+
         public IActionResult VendorDashboard()
         {
 
@@ -211,12 +213,45 @@ namespace Vax_Aid.Controllers
             else
             {
                 userDetailsList = _context.UserDetails.Where(x => x.VendorLocationId == vendor.VendorLocationId).Include(u => u.Address).Include(u => u.VaccineInfo).ToList();
-                
+
             }
-            
+
 
             ViewData["Message"] = "Vendor Dashboard.";
             return View(userDetailsList);
+        }
+        public JsonResult GetDataForPieChart()
+        {
+            List<PieChartVM> toReturn = new List<PieChartVM>();
+            string vandorEmail = User.Identity.Name;
+            var user = _context.Users.Where(x => x.UserName == vandorEmail).FirstOrDefault();
+            string id = user.Id;
+            var vendor = _context.VendorLocation.Where(x => x.UserID == user.Id).FirstOrDefault();
+            string query = @"select case when FlowStatus = 0 then 'Unchecked' when FlowStatus = 1 then 'Vaccinated' when FlowStatus = 2 then 'Unvaccinated' else '--' end as FlowStatus ," +
+                " count(1) as TotalCount from UserDetails" +
+                " where VendorLocationId = " + vendor.VendorLocationId +
+                " group by FlowStatus";
+            using (var command = _context.Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = query;
+                _context.Database.OpenConnection();
+                using (var result = command.ExecuteReader())
+                {
+                    while (result.Read())
+                    {
+                        toReturn.Add(new PieChartVM()
+                        {
+                            FlowStatus = result.GetString(0),
+                            TotalCount = result.GetInt32(1)
+                        });
+                    }
+                }
+            }
+            return Json(new
+            {
+                Success =true,
+                Data  = toReturn
+            });
         }
 
         private bool VendorLocationExists(int id)

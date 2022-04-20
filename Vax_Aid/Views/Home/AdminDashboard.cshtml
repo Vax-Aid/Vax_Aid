@@ -3,4 +3,114 @@
 }
 <h2>@ViewData["Title"]</h2>
 
-<h3>This is Admin Dashboard...</h3>
+<h3>Welcome Admin...</h3>
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    
+</figure>
+
+
+@section Scripts
+{
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script>
+        $(document).ready(function () {
+            loadChartData();
+
+        });
+        function loadChartData() {
+            $.ajax({
+                type: "get",
+                url: '@Url.Action("GetDataForBarDiagram", "Home")',
+                dataType: "application/json",
+                contentType: "application/json",
+                success: function (savingStatus) {
+                    debugger;
+
+                },
+                error: function (er) {
+                    var resp = $.parseJSON(er.responseText);
+                    debugger;
+                    if (resp.success) {
+                        var serverData = resp.data;
+                        var categoriesObject = resp.distinctVendorList;
+                        var distinctFlowStatus = resp.distinctFlowStatus;
+
+                        var graphData = [];
+                        $.each(distinctFlowStatus, function (i, x) {
+                            debugger;
+                            var innerdata = [];
+
+                            $.each(categoriesObject, function (j, y) {
+                                var filtered = serverData.filter(function (a) {
+                                    return a.vendorName == y && a.flowStatus == x;
+                                })
+                                if (filtered.length > 0) {
+                                    innerdata.push(filtered[0].totalCount);
+                                } else {
+                                    innerdata.push(0);
+                                }
+                                debugger;
+                            });
+
+
+                            graphData.push({
+                                name: x,
+                                data: innerdata
+                            });
+                        });
+                       
+
+                        loadChart(graphData, categoriesObject)
+                    } else {
+                        alert(resp.message);
+                    }
+
+                }
+            })
+
+        }
+
+        function loadChart(graphData,xaxisData) {
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Vaccination Details'
+                },
+                xAxis: {
+                    categories: xaxisData,
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'No. of Patients'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: graphData
+            });
+        }
+
+    </script>
+
+
+}

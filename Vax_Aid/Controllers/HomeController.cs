@@ -6,9 +6,11 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Vax_Aid.Data;
 using Vax_Aid.Models;
 using Vax_Aid.Service;
+using Vax_Aid.ViewModels;
 
 namespace Vax_Aid.Controllers
 {
@@ -107,6 +109,44 @@ namespace Vax_Aid.Controllers
         {
             ViewData["Message"] = "Admin Dashboard.";
             return View();
+        }
+        public JsonResult GetDataForBarDiagram()
+        {
+            List<BarGraphVM> toReturn = new List<BarGraphVM>();
+            string vandorEmail = User.Identity.Name;
+            var user = _context.Users.Where(x => x.UserName == vandorEmail).FirstOrDefault();
+            string id = user.Id;
+            var vendor = _context.VendorLocation.Where(x => x.UserID == user.Id).FirstOrDefault();
+            string query = @"select isnull(vl.LocationName,'--') as VendorName,case when FlowStatus = 0 then 'Unchecked' when FlowStatus = 1 then 'Vaccinated' when FlowStatus = 2 then 'Unvaccinated' else '--' end as FlowStatus,count(1) as TotalCount from UserDetails ud
+                            left outer join VendorLocation vl on vl.VendorLocationId = ud.VendorLocationId
+                            group by isnull(vl.LocationName,'--'),FlowStatus
+                            order by VendorName";
+            using (var command = _context.Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = query;
+                _context.Database.OpenConnection();
+                using (var result = command.ExecuteReader())
+                {
+                    while (result.Read())
+                    {
+                        toReturn.Add(new BarGraphVM()
+                        {
+                            VendorName = result.GetString(0),
+                            FlowStatus = result.GetString(1),
+                            TotalCount = result.GetInt32(2)
+                        }) ;
+                    }
+                }
+            }
+            List<string> distinctVendorname = toReturn.Select(m => m.VendorName).Distinct().ToList();
+            List<string> distinctFlowStatus = toReturn.Select(m => m.FlowStatus).Distinct().ToList();
+            return Json(new
+            {
+                Success = true,
+                Data = toReturn,
+                DistinctVendorList = distinctVendorname,
+                DistinctFlowStatus = distinctFlowStatus
+            });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

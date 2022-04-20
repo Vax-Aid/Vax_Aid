@@ -233,7 +233,7 @@ namespace Vax_Aid.Controllers
 
         public JsonResult GetUserDetailsInfoByID(int userid)
         {
-            var userDetailInfo = _context.UserDetails.Where(x => x.UserDetailsId == userid).FirstOrDefault();
+            var userDetailInfo = _context.UserDetails.Where(x => x.UserDetailsId == userid).Include(u => u.Address).Include(u => u.VaccineInfo).FirstOrDefault();
             if (userDetailInfo != null)
             {
                 return Json(new
