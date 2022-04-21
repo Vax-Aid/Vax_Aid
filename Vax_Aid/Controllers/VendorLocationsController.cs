@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Vax_Aid.Data;
 using Vax_Aid.Models;
@@ -228,20 +227,13 @@ namespace Vax_Aid.Controllers
             var user = _context.Users.Where(x => x.UserName == vandorEmail).FirstOrDefault();
             string id = user.Id;
             var vendor = _context.VendorLocation.Where(x => x.UserID == user.Id).FirstOrDefault();
-            string query = @"select case when FlowStatus = 0 then 'Unchecked' when FlowStatus = 1 then 'Vaccinated' when FlowStatus = 2 then 'Unvaccinated' else '--' end as FlowStatus ,
-              count(1) as TotalCount from UserDetails
-                where (@isAdmin = 1 or VendorLocationId = @vendorLocationID)
-                group by FlowStatus";
+            string query = @"select case when FlowStatus = 0 then 'Unchecked' when FlowStatus = 1 then 'Vaccinated' when FlowStatus = 2 then 'Unvaccinated' else '--' end as FlowStatus ," +
+                " count(1) as TotalCount from UserDetails" +
+                " where VendorLocationId = " + vendor.VendorLocationId +
+                " group by FlowStatus";
             using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
                 command.CommandText = query;
-                SqlParameter param1 = new SqlParameter("vendorLocationID", vendor.VendorLocationId);
-                SqlParameter param2 = new SqlParameter("isAdmin", 0);
-
-                command.Parameters.Add(param1);
-                command.Parameters.Add(param2);
-
-
                 _context.Database.OpenConnection();
                 using (var result = command.ExecuteReader())
                 {
