@@ -118,6 +118,9 @@
                     @Html.DisplayFor(modelItem => item.Disability)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.FlowStatus)
+                </td>
+                <td>
                     <a asp-action="Edit" asp-route-id="@item.UserDetailsId">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.UserDetailsId">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.UserDetailsId">Delete</a>

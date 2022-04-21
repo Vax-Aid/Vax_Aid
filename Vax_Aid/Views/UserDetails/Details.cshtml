@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Conformation";
-   
+
 }
 
 
@@ -101,6 +101,23 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.UserDetailsId">Edit</a> 
+    <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.UserDetailsId">Edit</a>
+    <button class="btn btn-primary btnToken">View Token</button>
 
 </div>
+@section Scripts {
+
+    
+    <script>
+        $(document).on('click', '.btnToken', function () {
+            showMessage({
+                title: 'this is title',
+                text:'this is text'
+            })
+        })
+
+        
+    </script>
+
+
+}

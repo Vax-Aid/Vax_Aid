@@ -49,7 +49,16 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <!--common script for all pages-->
     <script src="~/theme/js/common-scripts.js"></script>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/lib/cdnjs/sweetalert2.all.min.js"></script>
+    <script>
+        function showMessage(obj) {
+            Swal.fire({
+                title: obj.title,
+                text: obj.text,
+            })
+        }
+    </script>
 
     @RenderSection("Scripts", required: false)
 </body>

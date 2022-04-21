@@ -148,6 +148,35 @@ namespace Vax_Aid.Controllers
                 DistinctFlowStatus = distinctFlowStatus
             });
         }
+        public JsonResult GetDataForPieChart()
+        {
+            List<PieChartVM> toReturn = new List<PieChartVM>();
+            var user = _context.UserDetails.ToList();
+            string query = @"select case when FlowStatus = 0 then 'Unchecked' when FlowStatus = 1 then 'Vaccinated' when FlowStatus = 2 then 'Unvaccinated' else '--' end as FlowStatus ," +
+                " count(1) as TotalCount from UserDetails" +
+                " group by FlowStatus";
+            using (var command = _context.Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = query;
+                _context.Database.OpenConnection();
+                using (var result = command.ExecuteReader())
+                {
+                    while (result.Read())
+                    {
+                        toReturn.Add(new PieChartVM()
+                        {
+                            FlowStatus = result.GetString(0),
+                            TotalCount = result.GetInt32(1)
+                        });
+                    }
+                }
+            }
+            return Json(new
+            {
+                Success = true,
+                Data = toReturn
+            });
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
